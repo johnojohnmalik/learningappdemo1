@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSI & TCP/IP Models</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="progress-bar.css">
+    <style>
+        .model-section {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #00ffff;
+        }
+
+        .layer {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #00ffff;
+        }
+
+        .layer h3 {
+            color: #00ffff;
+            margin-bottom: 10px;
+        }
+
+        .layer p {
+            color: #fff;
+            margin: 5px 0;
+        }
+
+        .analogy {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .analogy h4 {
+            color: #00ffff;
+            margin-bottom: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #00ffff;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 OSI & TCP/IP Models</h1>
+
+        <div class="model-section">
+            <h2>What are Network Models?</h2>
+            <p>Network models are like blueprints that help us understand how computers communicate. They break down the complex process of sending data into smaller, manageable steps.</p>
+            
+            <div class="analogy">
+                <h4>Think of it like this:</h4>
+                <p>Imagine you're sending a letter. You need to write it, put it in an envelope, add an address, and send it through the mail. Network models work similarly, breaking down the process of sending data into clear steps.</p>
+            </div>
+        </div>
+
+        <div class="model-section">
+            <h2>OSI Model (Open Systems Interconnection)</h2>
+            <p>The OSI model is a theoretical framework that divides network communication into seven layers. Each layer has a specific job and works with the layers above and below it.</p>
+
+            <div class="layer">
+                <h3>7. Application Layer</h3>
+                <p>This is where you interact with the network. It includes web browsers, email clients, and other applications.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>You writing a letter (the application) that you want to send.</p>
+                </div>
+            </div>
+
+            <div class="layer">
+                <h3>6. Presentation Layer</h3>
+                <p>Handles data formatting, encryption, and compression.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>Translating your letter into a language the recipient can understand.</p>
+                </div>
+            </div>
+
+            <div class="layer">
+                <h3>5. Session Layer</h3>
+                <p>Manages connections between applications.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>Setting up a meeting time to exchange letters.</p>
+                </div>
+            </div>
+
+            <div class="layer">
+                <h3>4. Transport Layer</h3>
+                <p>Ensures reliable data delivery and error checking.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>Making sure your letter is properly packaged and will arrive safely.</p>
+                </div>
+            </div>
+
+            <div class="layer">
+                <h3>3. Network Layer</h3>
+                <p>Handles routing and addressing.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>Planning the route your letter will take to reach its destination.</p>
+                </div>
+            </div>
+
+            <div class="layer">
+                <h3>2. Data Link Layer</h3>
+                <p>Manages direct connections between devices.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>The postal service that physically moves your letter between post offices.</p>
+                </div>
+            </div>
+
+            <div class="layer">
+                <h3>1. Physical Layer</h3>
+                <p>Deals with the actual transmission of data through cables or wireless signals.</p>
+                <div class="analogy">
+                    <h4>Think of it like this:</h4>
+                    <p>The actual trucks, planes, and mail carriers that transport your letter.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="model-section">
+            <h2>TCP/IP Model</h2>
+            <p>The TCP/IP model is the practical implementation used in the real world. It's simpler than the OSI model, with just four layers.</p>
+
+            <div class="layer">
+                <h3>4. Application Layer</h3>
+                <p>Combines the Application, Presentation, and Session layers of the OSI model.</p>
+                <p>Includes protocols like HTTP, FTP, and SMTP.</p>
+            </div>
+
+            <div class="layer">
+                <h3>3. Transport Layer</h3>
+                <p>Same as the OSI Transport Layer.</p>
+                <p>Uses TCP (reliable) and UDP (fast) protocols.</p>
+            </div>
+
+            <div class="layer">
+                <h3>2. Internet Layer</h3>
+                <p>Similar to the OSI Network Layer.</p>
+                <p>Uses IP (Internet Protocol) for addressing and routing.</p>
+            </div>
+
+            <div class="layer">
+                <h3>1. Network Access Layer</h3>
+                <p>Combines the Data Link and Physical layers of the OSI model.</p>
+                <p>Handles the physical connection and data transmission.</p>
+            </div>
+        </div>
+
+        <div class="model-section">
+            <h2>OSI vs TCP/IP Comparison</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>OSI Model</th>
+                    <th>TCP/IP Model</th>
+                </tr>
+                <tr>
+                    <td>Number of Layers</td>
+                    <td>7 layers</td>
+                    <td>4 layers</td>
+                </tr>
+                <tr>
+                    <td>Development</td>
+                    <td>Developed by ISO</td>
+                    <td>Developed by DARPA</td>
+                </tr>
+                <tr>
+                    <td>Usage</td>
+                    <td>Mostly theoretical</td>
+                    <td>Practical implementation</td>
+                </tr>
+                <tr>
+                    <td>Complexity</td>
+                    <td>More complex</td>
+                    <td>Simpler</td>
+                </tr>
+                <tr>
+                    <td>Real-world Application</td>
+                    <td>Used for teaching</td>
+                    <td>Used in actual networks</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="model-section">
+            <h2>Why Do We Need These Models?</h2>
+            <ul>
+                <li>They help us understand how networks work</li>
+                <li>They make it easier to troubleshoot problems</li>
+                <li>They provide a common language for network professionals</li>
+                <li>They help in designing new network technologies</li>
+            </ul>
+        </div>
+    </div>
+    <script src="progress-bar.js"></script>
+</body>
+</html> 

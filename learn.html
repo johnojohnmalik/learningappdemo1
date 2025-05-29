@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OSI and TCP/IP Learning Module</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="progress-bar.css">
+  <style>
+    .section {
+      background-color: var(--light-bg);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      text-shadow: var(--glow);
+    }
+
+    .section p {
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .layer {
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid rgba(0, 204, 255, 0.2);
+    }
+
+    .layer h3 {
+      color: var(--secondary-color);
+      margin-bottom: 10px;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .quiz-section {
+      background-color: var(--light-bg);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-color);
+    }
+
+    .quiz-question {
+      margin-bottom: 20px;
+    }
+
+    .quiz-question label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    .quiz-question input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .feedback.correct {
+      background-color: rgba(0, 255, 102, 0.15);
+      border: 1px solid var(--correct-color);
+      color: var(--correct-color);
+    }
+
+    .feedback.incorrect {
+      background-color: rgba(255, 51, 102, 0.15);
+      border: 1px solid var(--wrong-color);
+      color: var(--wrong-color);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid rgba(0, 204, 255, 0.2);
+      color: var(--text-color);
+    }
+
+    th {
+      background-color: rgba(0, 204, 255, 0.1);
+      color: var(--primary-color);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .emoji {
+      font-size: 1.2em;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>OSI and TCP/IP Models</h1>
+
+    <div class="section">
+      <h2>🌐 What Are OSI and TCP/IP Models?</h2>
+      <p>Think of sending a message—like a photo or a text—to a friend on the other side of the world. How does it get there? It travels through different steps or "layers." The OSI and TCP/IP models help us understand those steps.</p>
+      <p>Let's break them down using a simple real-life example: Sending a postcard ✉️</p>
+    </div>
+
+    <div class="section">
+      <h2>📦 The OSI Model – Like a 7-Layer Package Delivery System</h2>
+      <p>OSI = Open Systems Interconnection<br>It has 7 layers. Each one has a job, like a team member in a delivery company.</p>
+
+      <div class="layer">
+        <h3>🔹 Layer 7 – Application (You)</h3>
+        <p>You write the message on the postcard and hand it over. This is your app—like WhatsApp, Gmail, or a browser.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 6 – Presentation (Translator)</h3>
+        <p>If you wrote your message in a different language, this layer translates it so the other side can understand.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 5 – Session (Conversation Setup)</h3>
+        <p>Like starting a phone call. It opens the connection between you and your friend and keeps it alive until you're done.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 4 – Transport (Traffic Controller)</h3>
+        <p>Breaks your message into small pieces (packets) and makes sure everything arrives safely and in the right order.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 3 – Network (GPS)</h3>
+        <p>Decides the best route for the message to travel across networks, like roads on a map.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 2 – Data Link (Post Office)</h3>
+        <p>Packages the message into an envelope and adds the sender and receiver address (like a return label).</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 1 – Physical (Wires & Waves)</h3>
+        <p>Physically sends the message as electrical signals, Wi-Fi waves, or fiber optics.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🌍 The TCP/IP Model – Like a 4-Layer Shortcut Version</h2>
+      <p>TCP/IP = Transmission Control Protocol / Internet Protocol<br>It's simpler and actually used in real life. It has 4 layers, but it does the same job as OSI.</p>
+
+      <div class="layer">
+        <h3>🟢 Application Layer (Layers 5–7 in OSI)</h3>
+        <p>This is where apps like browsers and email live. It prepares your data to be sent.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🟡 Transport Layer (Same as OSI Layer 4)</h3>
+        <p>Breaks data into pieces, numbers them, and checks they all arrive correctly.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔵 Internet Layer (Same as OSI Layer 3)</h3>
+        <p>Chooses the best path for the message, using IP addresses.</p>
+      </div>
+
+      <div class="layer">
+        <h3>⚫ Network Access Layer (Layers 1–2 in OSI)</h3>
+        <p>Handles the physical sending of data over cables, Wi-Fi, etc.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📊 OSI vs. TCP/IP (Simple Table)</h2>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>OSI Model</th>
+            <th>TCP/IP Model</th>
+            <th>What It Does (In Simple Terms)</th>
+          </tr>
+          <tr>
+            <td>Application (7)</td>
+            <td>Application</td>
+            <td>User interacts with software</td>
+          </tr>
+          <tr>
+            <td>Presentation (6)</td>
+            <td>Application</td>
+            <td>Formats data (e.g., encrypt/decrypt)</td>
+          </tr>
+          <tr>
+            <td>Session (5)</td>
+            <td>Application</td>
+            <td>Starts/stops connection</td>
+          </tr>
+          <tr>
+            <td>Transport (4)</td>
+            <td>Transport</td>
+            <td>Sends data reliably</td>
+          </tr>
+          <tr>
+            <td>Network (3)</td>
+            <td>Internet</td>
+            <td>Finds the best route</td>
+          </tr>
+          <tr>
+            <td>Data Link (2)</td>
+            <td>Network Access</td>
+            <td>Prepares data to be sent physically</td>
+          </tr>
+          <tr>
+            <td>Physical (1)</td>
+            <td>Network Access</td>
+            <td>Sends data as signals</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🧠 Final Thought: Why Learn This?</h2>
+      <p>Understanding these models helps you:</p>
+      <ul>
+        <li>Know how the internet really works</li>
+        <li>Troubleshoot network problems</li>
+        <li>Build a strong foundation for more advanced tech skills</li>
+      </ul>
+      <p>Just remember: It's all about teamwork. Each layer has a job to do so your message reaches the right place, safely and quickly.</p>
+    </div>
+
+    <div class="section">
+      <h2>🎯 Easy Way to Remember the OSI Layers</h2>
+      <p>Here are two helpful mnemonics to remember the OSI layers from top to bottom:</p>
+      
+      <div class="layer">
+        <h3>🔹 Mnemonic 1:</h3>
+        <p class="highlight">"All Prostitutes Sell The Naked Data Publicly"</p>
+        <ul>
+          <li>All – Application (Layer 7)</li>
+          <li>Prostitutes – Presentation (Layer 6)</li>
+          <li>Sell – Session (Layer 5)</li>
+          <li>The – Transport (Layer 4)</li>
+          <li>Naked – Network (Layer 3)</li>
+          <li>Data – Data Link (Layer 2)</li>
+          <li>Publicly – Physical (Layer 1)</li>
+        </ul>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Mnemonic 2 (Clean Version):</h3>
+        <p class="highlight">"All People Seem To Need Data Processing"</p>
+        <ul>
+          <li>All – Application</li>
+          <li>People – Presentation</li>
+          <li>Seem – Session</li>
+          <li>To – Transport</li>
+          <li>Need – Network</li>
+          <li>Data – Data Link</li>
+          <li>Processing – Physical</li>
+        </ul>
+      </div>
+
+      <p>💡 These mnemonics help you remember the OSI layers from top to bottom, which is useful when thinking about how data is created and prepared for transmission.</p>
+    </div>
+
+    <div class="quiz-section">
+      <h2>✅ Quick Check: Did You Get It?</h2>
+      
+      <div class="quiz-question">
+        <p>What does the OSI model help us understand?</p>
+        <label>
+          <input type="radio" name="q1" value="A"> A. How to write code
+        </label>
+        <label>
+          <input type="radio" name="q1" value="B"> B. The steps a message takes to travel through a network
+        </label>
+        <label>
+          <input type="radio" name="q1" value="C"> C. How to post a letter at the post office
+        </label>
+        <div class="feedback" id="feedback1"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>Which OSI layer is like a GPS, finding the best route for your data?</p>
+        <label>
+          <input type="radio" name="q2" value="A"> A. Application
+        </label>
+        <label>
+          <input type="radio" name="q2" value="B"> B. Network
+        </label>
+        <label>
+          <input type="radio" name="q2" value="C"> C. Transport
+        </label>
+        <div class="feedback" id="feedback2"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>What's the main difference between the OSI model and the TCP/IP model?</p>
+        <label>
+          <input type="radio" name="q3" value="A"> A. TCP/IP has fewer layers but does the same job
+        </label>
+        <label>
+          <input type="radio" name="q3" value="B"> B. OSI is used today and TCP/IP is old
+        </label>
+        <label>
+          <input type="radio" name="q3" value="C"> C. TCP/IP is only for emails
+        </label>
+        <div class="feedback" id="feedback3"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🧰 OSI Model with Protocols – The 7-Layer Breakdown</h2>
+      <p>Each layer has its own tools (called protocols) to get the job done. Think of protocols like specific rules or apps that help each layer do its job.</p>
+
+      <div class="layer">
+        <h3>🔹 Layer 7 – Application</h3>
+        <p>Protocols:</p>
+        <ul>
+          <li>HTTP/HTTPS – Loads websites (secure = HTTPS)</li>
+          <li>FTP – Transfers files</li>
+          <li>SMTP / IMAP / POP3 – Send & receive emails</li>
+          <li>DNS – Turns names (like google.com) into IP addresses</li>
+        </ul>
+        <p>Example: You open your browser and type google.com → HTTP/HTTPS is working here.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 6 – Presentation</h3>
+        <p>Protocols:</p>
+        <ul>
+          <li>SSL/TLS – Encrypts your data (used in HTTPS)</li>
+          <li>JPEG, MP4, GIF – Format media files</li>
+        </ul>
+        <p>Example: When you visit a secure site (https://), TLS encrypts the page so no one can read your info.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 5 – Session</h3>
+        <p>Protocols:</p>
+        <ul>
+          <li>NetBIOS – Helps apps talk on a local network</li>
+          <li>RPC (Remote Procedure Call) – Used in services that let computers talk to each other</li>
+        </ul>
+        <p>Example: When you join a Zoom meeting, this layer helps open and maintain the live session.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 4 – Transport</h3>
+        <p>Protocols:</p>
+        <ul>
+          <li>
+            <strong>🔄 TCP (Transmission Control Protocol)</strong>
+            <ul>
+              <li>Reliable: Ensures all data arrives correctly and in order.</li>
+              <li>Connection-based: Sets up a connection before sending data.</li>
+              <li>Error checking: If something's missing or out of order, it's re-sent.</li>
+              <li>Used for: Email, web browsing (HTTP/HTTPS), file downloads — anything where accuracy matters.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>⚡ UDP (User Datagram Protocol)</strong>
+            <ul>
+              <li>Faster, but unreliable: Sends data without checking if it arrived.</li>
+              <li>No connection: Just sends and forgets.</li>
+              <li>No error correction: If data is lost, it's gone.</li>
+              <li>Used for: Live video, online gaming, voice calls — situations where speed is more important than perfection.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Example: TCP is like sending mail with tracking. UDP is like shouting out loud—fast but no receipt.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 3 – Network</h3>
+        <p>Protocols:</p>
+        <ul>
+          <li>IP (Internet Protocol) – Finds the best path for data</li>
+          <li>ICMP – Used by tools like ping to test connections</li>
+          <li>IPSec – Adds security to IP traffic</li>
+        </ul>
+        <p>Example: IP is like GPS for your data—it finds the best road to your friend's phone or computer.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 2 – Data Link</h3>
+        <p>Protocols:</p>
+        <ul>
+          <li>Ethernet – Used in wired connections</li>
+          <li>Wi-Fi (IEEE 802.11) – Used in wireless connections</li>
+          <li>MAC Addressing – Each device has a unique ID here</li>
+        </ul>
+        <p>Example: Like putting your name and your friend's name on an envelope. It knows who to send it to.</p>
+      </div>
+
+      <div class="layer">
+        <h3>🔹 Layer 1 – Physical</h3>
+        <p>No protocols—just hardware</p>
+        <p>Things like:</p>
+        <ul>
+          <li>Cables</li>
+          <li>Wi-Fi signals</li>
+          <li>Fiber optics</li>
+          <li>Connectors & voltages</li>
+        </ul>
+        <p>Example: This is the actual wire, wave, or laser that carries your data—like the postman's van.</p>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h2>🔷 Protocol Understanding Check</h2>
+      
+      <div class="quiz-question">
+        <p>Which protocol is used to load secure websites (https://)?</p>
+        <label>
+          <input type="radio" name="q4" value="A"> A. FTP
+        </label>
+        <label>
+          <input type="radio" name="q4" value="B"> B. HTTP
+        </label>
+        <label>
+          <input type="radio" name="q4" value="C"> C. HTTPS / TLS
+        </label>
+        <div class="feedback" id="feedback4"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>Which layer uses TCP and UDP to control how your data gets delivered?</p>
+        <label>
+          <input type="radio" name="q5" value="A"> A. Application Layer
+        </label>
+        <label>
+          <input type="radio" name="q5" value="B"> B. Transport Layer
+        </label>
+        <label>
+          <input type="radio" name="q5" value="C"> C. Network Layer
+        </label>
+        <div class="feedback" id="feedback5"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>At which layer would you find protocols like Ethernet and Wi-Fi?</p>
+        <label>
+          <input type="radio" name="q6" value="A"> A. Internet Layer
+        </label>
+        <label>
+          <input type="radio" name="q6" value="B"> B. Physical Layer
+        </label>
+        <label>
+          <input type="radio" name="q6" value="C"> C. Network Access / Data Link Layer
+        </label>
+        <div class="feedback" id="feedback6"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quiz answers
+    const answers = {
+      q1: 'B',
+      q2: 'B',
+      q3: 'A',
+      q4: 'C',
+      q5: 'B',
+      q6: 'C'
+    };
+
+    // Add event listeners to all radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const questionName = this.name;
+        const selectedAnswer = this.value;
+        const feedback = document.getElementById('feedback' + questionName.slice(1));
+        
+        if (selectedAnswer === answers[questionName]) {
+          feedback.textContent = '✅ Correct!';
+          feedback.className = 'feedback correct';
+        } else {
+          feedback.textContent = '❌ Incorrect. Try again!';
+          feedback.className = 'feedback incorrect';
+        }
+        feedback.style.display = 'block';
+      });
+    });
+  </script>
+  <script src="progress-bar.js"></script>
+</body>
+</html> 

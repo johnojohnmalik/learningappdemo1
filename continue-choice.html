@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Continue Your Journey</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .choice-container {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .choice-title {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .choice-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .choice-btn {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            min-width: 200px;
+        }
+
+        .choice-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .choice-description {
+            color: #fff;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="choice-container">
+        <h1 class="choice-title">Continue Your Journey</h1>
+        <p class="choice-description">
+            You've completed this section! Would you like to continue learning more topics or test your knowledge with a practice quiz?
+        </p>
+        <div class="choice-buttons">
+            <button class="choice-btn" id="continue-btn">Continue Learning</button>
+            <button class="choice-btn" id="practice-btn">Practice Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the current module from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentModule = urlParams.get('module');
+
+        document.getElementById('continue-btn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('practice-btn').addEventListener('click', () => {
+            // Redirect to the appropriate quiz based on the current module
+            switch(currentModule) {
+                case 'osi':
+                    window.location.href = 'questions.html';
+                    break;
+                case 'cables':
+                    window.location.href = 'cables-quiz.html';
+                    break;
+                case 'terms':
+                    window.location.href = 'network-terms-quiz.html';
+                    break;
+                default:
+                    window.location.href = 'questions.html';
+            }
+        });
+    </script>
+</body>
+</html> 

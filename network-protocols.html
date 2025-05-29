@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Protocols IPv4 - Learning Content</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content-section {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .content-section h2 {
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+        .content-section ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .content-section li {
+            margin: 10px 0;
+            color: #fff;
+        }
+        .content-section li::before {
+            content: "•";
+            color: #00ffff;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        .question-box {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .question-box p {
+            color: #00ffff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .question-box ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .question-box li {
+            margin: 8px 0;
+            color: #fff;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .question-box li:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+        .question-box li.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+        }
+        .question-box li.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+        }
+        .question-box li.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .feedback-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .feedback-message.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+        .feedback-message.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+        .continue-btn {
+            display: none;
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        .continue-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .continue-btn.visible {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Welcome to the World of Network Protocols!</h1>
+        
+        <div class="content-section">
+            <p>Ever wondered how your computer talks to the internet or to other devices on your network? It's not magic – it's a bunch of smart rules called protocols working behind the scenes.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>🔗 TCP/IP: The Language of the Internet</h2>
+            <p>The TCP/IP model is like a rulebook that helps computers talk to each other. It's the foundation of the internet—everything from browsing websites to sending emails runs on it.</p>
+            <div class="question-box" id="tcpip-question">
+                <p>🤔 Quick Check: If you were to explain TCP/IP to a friend, which of these would be the best analogy?</p>
+                <ul>
+                    <li>A) A recipe book for cooking</li>
+                    <li>B) A set of traffic rules for the internet</li>
+                    <li>C) A dictionary for computer words</li>
+                    <li>D) A map of the internet</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🌍 IPv4 – Internet Protocol Version 4</h2>
+            <p>Think of IPv4 as your computer's home address on the internet. Just like mail needs your address to reach you, data needs an IP address to find the right device.</p>
+            <ul>
+                <li>IPv4 addresses look like this: 192.168.1.1</li>
+                <li>Each device in a network gets a unique one!</li>
+            </ul>
+            <div class="question-box" id="ipv4-question">
+                <p>🤔 Quick Check: Which of these looks like a valid IPv4 address?</p>
+                <ul>
+                    <li>A) 192.168.1.256</li>
+                    <li>B) 192.168.1.1</li>
+                    <li>C) 192.168.1</li>
+                    <li>D) 192.168.1.1.1</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🧭 ARP – Address Resolution Protocol</h2>
+            <p>Imagine you're trying to send a message to someone, but all you know is their name—not their exact location. ARP helps computers find out the "physical address" (MAC address) that matches an IP address.</p>
+            <p>It's like asking: "Hey, who's 192.168.0.5?" and getting: "That's me, and here's my MAC address!"</p>
+            <div class="question-box" id="arp-question">
+                <p>🤔 Quick Check: What problem does ARP solve?</p>
+                <ul>
+                    <li>A) Finding the fastest route to a website</li>
+                    <li>B) Converting IP addresses to MAC addresses</li>
+                    <li>C) Protecting your computer from viruses</li>
+                    <li>D) Making your internet connection faster</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🧠 ARP Cache</h2>
+            <p>To save time, computers remember the answers to ARP questions in a table called the ARP cache. It's like a quick-reference notebook of who's who on the network.</p>
+            <div class="question-box" id="arp-cache-question">
+                <p>🤔 Quick Check: Why is the ARP cache useful?</p>
+                <ul>
+                    <li>A) It makes your computer run faster</li>
+                    <li>B) It saves time by remembering previous lookups</li>
+                    <li>C) It protects your network from hackers</li>
+                    <li>D) It helps you find websites faster</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🏡 Local vs. Outside Communication</h2>
+            <ul>
+                <li>Inside the local network: Devices use ARP and talk directly to each other.</li>
+                <li>Outside the network: If the device isn't nearby, your computer sends the data to a router, which acts like a post office and sends it out to the world.</li>
+            </ul>
+            <div class="question-box" id="local-comm-question">
+                <p>🤔 Quick Check: When you send a message to a friend on the same WiFi network, what happens?</p>
+                <ul>
+                    <li>A) The message goes through the internet</li>
+                    <li>B) The message goes directly to your friend's device</li>
+                    <li>C) The message is stored in the cloud first</li>
+                    <li>D) The message is converted to a different format</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🛎️ ICMP – Internet Control Message Protocol</h2>
+            <p>You've probably heard of ping. That's ICMP in action! It's a helper protocol that asks: "Are you there?" and waits for a response.</p>
+            <ul>
+                <li>Great for testing if a device is reachable</li>
+                <li>Used for error reporting and diagnostics</li>
+            </ul>
+            <div class="question-box" id="icmp-question">
+                <p>🤔 Quick Check: What happens when you use the 'ping' command?</p>
+                <ul>
+                    <li>A) Your computer sends a test message and waits for a reply</li>
+                    <li>B) Your computer downloads a file</li>
+                    <li>C) Your computer connects to a website</li>
+                    <li>D) Your computer checks for updates</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📢 IGMP – Internet Group Management Protocol</h2>
+            <p>What if multiple devices want to listen to the same stream (like a live video)? IGMP manages these "group chats" on a network.</p>
+            <p>It's like a subscription manager for group messages</p>
+            <div class="question-box" id="igmp-question">
+                <p>🤔 Quick Check: When would IGMP be most useful?</p>
+                <ul>
+                    <li>A) Sending an email to one person</li>
+                    <li>B) Watching a live stream with friends on the same network</li>
+                    <li>C) Downloading a file from a website</li>
+                    <li>D) Playing a single-player game</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>✉️ UDP – User Datagram Protocol</h2>
+            <p>UDP is fast and simple. It just sends data without checking if it got there.</p>
+            <ul>
+                <li>Great for things like live video or online games</li>
+                <li>But... no guarantees it reaches its destination!</li>
+            </ul>
+            <div class="question-box" id="udp-question">
+                <p>🤔 Quick Check: Why might UDP be better than TCP for online gaming?</p>
+                <ul>
+                    <li>A) It's more secure</li>
+                    <li>B) It's faster, even if some data gets lost</li>
+                    <li>C) It uses less internet data</li>
+                    <li>D) It works better with wireless networks</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📦 TCP – Transmission Control Protocol</h2>
+            <p>TCP is more careful. It checks to make sure every piece of data gets delivered correctly.</p>
+            <p>Like sending a package with tracking and delivery confirmation</p>
+            <div class="question-box" id="tcp-question">
+                <p>🤔 Quick Check: When would you want to use TCP instead of UDP?</p>
+                <ul>
+                    <li>A) When playing a fast-paced online game</li>
+                    <li>B) When sending an important email</li>
+                    <li>C) When watching a live stream</li>
+                    <li>D) When making a phone call</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📞 TCP Three-Way Handshake</h2>
+            <p>Before two devices start talking, they shake hands. Literally:</p>
+            <ul>
+                <li>"Hey, can we talk?" (SYN)</li>
+                <li>"Sure, I'm listening!" (SYN-ACK)</li>
+                <li>"Awesome, let's go!" (ACK)</li>
+            </ul>
+            <p>Now they're connected!</p>
+            <div class="question-box" id="tcp-handshake-question">
+                <p>🤔 Quick Check: What's the main purpose of the TCP three-way handshake?</p>
+                <ul>
+                    <li>A) To make the connection faster</li>
+                    <li>B) To make sure both devices are ready to communicate</li>
+                    <li>C) To encrypt the connection</li>
+                    <li>D) To save bandwidth</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🪟 TCP Sliding Window</h2>
+            <p>To avoid overwhelming each other, computers send a few pieces of data at a time—then wait for confirmation. This is called the sliding window.</p>
+            <p>It's smart, adaptive, and keeps data flowing smoothly.</p>
+            <div class="question-box" id="tcp-window-question">
+                <p>🤔 Quick Check: Why does TCP use a sliding window?</p>
+                <ul>
+                    <li>A) To make the connection more secure</li>
+                    <li>B) To prevent overwhelming the receiving device</li>
+                    <li>C) To save memory on the computer</li>
+                    <li>D) To make the connection faster</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🔢 Ports – TCP vs. UDP</h2>
+            <p>Ports are like doors on your device—each service (like email or web) uses a different door.</p>
+            <ul>
+                <li>Web = Port 80 (HTTP) or 443 (HTTPS)</li>
+                <li>Email = Port 25 (SMTP)</li>
+                <li>Games, streaming, and more may use UDP ports</li>
+            </ul>
+            <div class="question-box" id="ports-question">
+                <p>🤔 Quick Check: What's the main purpose of ports?</p>
+                <ul>
+                    <li>A) To make the internet faster</li>
+                    <li>B) To help your device know which application should handle incoming data</li>
+                    <li>C) To protect your computer from viruses</li>
+                    <li>D) To save internet data</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>💡 Try It Yourself!</h2>
+            <ul>
+                <li>Open a command line and type ping google.com – see how fast you get a reply!</li>
+                <li>Use tools like Wireshark to see real-time data packets flying across the network.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle question interactions
+        function setupQuestion(questionId, correctAnswer) {
+            const questionBox = document.getElementById(questionId);
+            const options = questionBox.querySelectorAll('li');
+            const feedback = questionBox.querySelector('.feedback-message');
+            let answered = false;
+
+            // Create continue button
+            const continueBtn = document.createElement('button');
+            continueBtn.className = 'continue-btn';
+            continueBtn.textContent = 'Continue to Next Section →';
+            questionBox.appendChild(continueBtn);
+
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    if (answered) return;
+
+                    const selectedAnswer = this.textContent.trim();
+                    const isCorrect = selectedAnswer === correctAnswer;
+
+                    // Disable all options
+                    options.forEach(opt => {
+                        opt.classList.add('disabled');
+                        if (opt.textContent.trim() === correctAnswer) {
+                            opt.classList.add('correct');
+                        }
+                    });
+
+                    // Show feedback
+                    feedback.textContent = isCorrect 
+                        ? "Correct! You got it! 🎉" 
+                        : "Oops! That's not quite right—try again.";
+                    feedback.className = `feedback-message ${isCorrect ? 'correct' : 'incorrect'}`;
+                    feedback.style.display = 'block';
+
+                    // Show continue button only if correct
+                    if (isCorrect) {
+                        continueBtn.classList.add('visible');
+                    }
+
+                    answered = true;
+                });
+            });
+
+            // Add continue button functionality
+            continueBtn.addEventListener('click', function() {
+                // Find the next section
+                const currentSection = questionBox.closest('.content-section');
+                const nextSection = currentSection.nextElementSibling;
+                
+                if (nextSection) {
+                    // Smooth scroll to next section
+                    nextSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        // Initialize all questions when the page loads
+        window.addEventListener('load', function() {
+            // TCP/IP Question
+            setupQuestion('tcpip-question', 'B) A set of traffic rules for the internet');
+            
+            // IPv4 Question
+            setupQuestion('ipv4-question', 'B) 192.168.1.1');
+            
+            // ARP Question
+            setupQuestion('arp-question', 'B) Converting IP addresses to MAC addresses');
+            
+            // ARP Cache Question
+            setupQuestion('arp-cache-question', 'B) It saves time by remembering previous lookups');
+            
+            // Local Communication Question
+            setupQuestion('local-comm-question', 'B) The message goes directly to your friend\'s device');
+            
+            // ICMP Question
+            setupQuestion('icmp-question', 'A) Your computer sends a test message and waits for a reply');
+            
+            // IGMP Question
+            setupQuestion('igmp-question', 'B) Watching a live stream with friends on the same network');
+            
+            // UDP Question
+            setupQuestion('udp-question', 'B) It\'s faster, even if some data gets lost');
+            
+            // TCP Question
+            setupQuestion('tcp-question', 'B) When sending an important email');
+            
+            // TCP Handshake Question
+            setupQuestion('tcp-handshake-question', 'B) To make sure both devices are ready to communicate');
+            
+            // TCP Sliding Window Question
+            setupQuestion('tcp-window-question', 'B) To prevent overwhelming the receiving device');
+            
+            // Ports Question
+            setupQuestion('ports-question', 'B) To help your device know which application should handle incoming data');
+        });
+    </script>
+</body>
+</html> 

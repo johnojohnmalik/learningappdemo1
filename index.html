@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .map-container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+            background: linear-gradient(45deg, #000000, #001a1a);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .map-title {
+            text-align: center;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            margin: 30px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            padding: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .level-node {
+            position: relative;
+            aspect-ratio: 1;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+            overflow: hidden;
+            padding: 30px;
+            text-align: center;
+            min-width: 200px;
+            z-index: 10;
+        }
+
+        .level-node::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1));
+            z-index: 1;
+        }
+
+        .level-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.2);
+        }
+
+        .level-node button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .path-line {
+            position: absolute;
+            background: none;
+            height: 2px;
+            z-index: 0;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .path-line svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            z-index: 0;
+        }
+
+        .path-line path {
+            stroke: #00ffff;
+            stroke-width: 2;
+            fill: none;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+        }
+
+        @keyframes wave {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -100; }
+        }
+
+        .node-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .map-grid {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .map-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .progress-container {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 200px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 2px;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background: #00ffff;
+            border-radius: 2px;
+            transition: height 0.1s ease;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .progress-text {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8em;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="map-container">
+        <h1 class="map-title">Welcome to the Learning Platform</h1>
+        <div class="map-grid">
+            <!-- Start Here -->
+            <div class="level-node">
+                <div class="node-number">Level 1</div>
+                <button id="start-here-btn">Start Here</button>
+            </div>
+
+            <!-- Networking Fundamentals -->
+            <div class="level-node">
+                <div class="node-number">Level 2</div>
+                <button id="fundamentals-btn" class="module-btn">Networking Fundamentals</button>
+            </div>
+
+            <!-- Network Basic Terms -->
+            <div class="level-node">
+                <div class="node-number">Level 3</div>
+                <button class="module-btn" onclick="window.location.href='network-terms-module.html'">Network Basic Terms</button>
+            </div>
+
+            <!-- Cables -->
+            <div class="level-node">
+                <div class="node-number">Level 4</div>
+                <button class="module-btn" onclick="window.location.href='cables-module.html'">A Quick Look at Cables</button>
+            </div>
+
+            <!-- OSI & TCP-IP -->
+            <div class="level-node">
+                <div class="node-number">Level 5</div>
+                <button class="module-btn" onclick="window.location.href='osi-module.html'">OSI & TCP-IP Modules</button>
+            </div>
+
+            <!-- Network Protocols IPv4 -->
+            <div class="level-node">
+                <div class="node-number">Level 6</div>
+                <button class="module-btn" onclick="window.location.href='network-protocols-module.html'">Network Protocols IPv4</button>
+            </div>
+
+            <!-- IPv4 Part 2: DHCP & DNS -->
+            <div class="level-node">
+                <div class="node-number">Level 7</div>
+                <button class="module-btn" onclick="window.location.href='ipv4-part2-module.html'">IPv4 Part 2: DHCP & DNS</button>
+            </div>
+        </div>
+        <div class="path-line">
+            <svg>
+                <path d="M 100,100 L 300,100 L 300,300 L 500,300 L 500,500 L 700,500" />
+            </svg>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-text">Progress</div>
+        </div>
+    </div>
+
+    <script>
+        // Function to draw paths between levels
+        function drawPaths() {
+            const nodes = document.querySelectorAll('.level-node');
+            const grid = document.querySelector('.map-grid');
+            const gridRect = grid.getBoundingClientRect();
+            
+            // Clear existing paths
+            document.querySelectorAll('.path-line').forEach(line => line.remove());
+            
+            // Define the path sequence
+            const pathSequence = [
+                [0, 1], // Start Here -> Networking Fundamentals
+                [1, 2], // Networking Fundamentals -> Network Basic Terms
+                [2, 3], // Network Basic Terms -> Cables
+                [3, 4], // Cables -> OSI & TCP-IP
+                [4, 5], // OSI & TCP-IP -> Network Protocols IPv4
+                [5, 6]  // Network Protocols IPv4 -> IPv4 Part 2: DHCP & DNS
+            ];
+            
+            pathSequence.forEach(([startIdx, endIdx]) => {
+                const startNode = nodes[startIdx];
+                const endNode = nodes[endIdx];
+                
+                const start = startNode.getBoundingClientRect();
+                const end = endNode.getBoundingClientRect();
+                
+                const line = document.createElement('div');
+                line.className = 'path-line';
+                
+                // Calculate center points relative to the grid
+                const startX = start.left + start.width / 2 - gridRect.left;
+                const startY = start.top + start.height / 2 - gridRect.top;
+                const endX = end.left + end.width / 2 - gridRect.left;
+                const endY = end.top + end.height / 2 - gridRect.top;
+                
+                // Calculate distance and angle
+                const distance = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+                const angle = Math.atan2(endY - startY, endX - startX);
+                
+                // Create SVG path
+                const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                
+                // Generate wave pattern
+                const waveHeight = 30;
+                const waveLength = 40;
+                const numWaves = Math.ceil(distance / waveLength);
+                let pathData = `M ${startX} ${startY}`;
+                
+                for (let j = 0; j < numWaves; j++) {
+                    const progress = j / numWaves;
+                    const x = startX + (endX - startX) * progress;
+                    const y = startY + (endY - startY) * progress;
+                    
+                    // Calculate perpendicular offset for wave
+                    const perpX = Math.cos(angle + Math.PI/2) * waveHeight * Math.sin(j * Math.PI * 2);
+                    const perpY = Math.sin(angle + Math.PI/2) * waveHeight * Math.sin(j * Math.PI * 2);
+                    
+                    pathData += ` L ${x + perpX} ${y + perpY}`;
+                }
+                
+                // Ensure we reach the end point
+                pathData += ` L ${endX} ${endY}`;
+                
+                path.setAttribute('d', pathData);
+                path.style.strokeDasharray = '8,8';
+                path.style.animation = 'wave 1.5s linear infinite';
+                
+                svg.appendChild(path);
+                line.appendChild(svg);
+                grid.appendChild(line);
+            });
+        }
+
+        // Initialize paths when the page loads
+        window.addEventListener('load', drawPaths);
+        window.addEventListener('resize', () => {
+            // Redraw paths
+            drawPaths();
+        });
+
+        // Original event listeners
+        document.getElementById('start-here-btn').addEventListener('click', function() {
+            window.location.href = 'networks-intro.html';
+        });
+        
+        document.getElementById('fundamentals-btn').addEventListener('click', () => {
+            window.location.href = 'networking-module.html';
+        });
+
+        // Add scroll progress tracking
+        function updateProgress() {
+            const progressBar = document.querySelector('.progress-bar');
+            const progressText = document.querySelector('.progress-text');
+            
+            // Calculate scroll progress
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            
+            // Update progress bar height
+            progressBar.style.height = `${progress}%`;
+            
+            // Update progress text
+            progressText.textContent = `Progress: ${Math.round(progress)}%`;
+        }
+
+        // Update progress on scroll
+        window.addEventListener('scroll', updateProgress);
+        // Initial update
+        window.addEventListener('load', updateProgress);
+    </script>
+</body>
+</html>

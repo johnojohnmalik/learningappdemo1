@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Cables Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .quiz-container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #00ffff;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            border-left: 4px solid #00ff00;
+        }
+
+        .question h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateX(10px);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .option label {
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 4px solid #ff0000;
+            color: #ff0000;
+        }
+
+        .final-score {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .final-score h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .final-score p {
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔌 Network Cables Quiz</h1>
+        <p>Test your knowledge about network cables and their characteristics.</p>
+
+        <div class="quiz-container">
+            <div class="question">
+                <h3>1. What is the main purpose of network cables?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="A" onchange="checkAnswer('q1', 'A')">
+                        A. To store data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="B" onchange="checkAnswer('q1', 'B')">
+                        B. To connect wireless devices
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="C" onchange="checkAnswer('q1', 'C')">
+                        C. To allow devices to connect and communicate in networks
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="D" onchange="checkAnswer('q1', 'D')">
+                        D. To provide backup power
+                    </label>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+            </div>
+
+            <div class="question">
+                <h3>2. What does the term "coaxial" refer to?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="A" onchange="checkAnswer('q2', 'A')">
+                        A. The type of connector used
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="B" onchange="checkAnswer('q2', 'B')">
+                        B. A shared axis between the conductor and shield
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="C" onchange="checkAnswer('q2', 'C')">
+                        C. Fiber alignment
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="D" onchange="checkAnswer('q2', 'D')">
+                        D. Wireless communication
+                    </label>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+            </div>
+
+            <div class="question">
+                <h3>3. Which type of twisted pair cable has no shielding?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="A" onchange="checkAnswer('q3', 'A')">
+                        A. STP
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="B" onchange="checkAnswer('q3', 'B')">
+                        B. FTP
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="C" onchange="checkAnswer('q3', 'C')">
+                        C. SFTP
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="D" onchange="checkAnswer('q3', 'D')">
+                        D. UTP
+                    </label>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+            </div>
+
+            <div class="question">
+                <h3>4. What is the main advantage of twisting wires in a twisted pair cable?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="A" onchange="checkAnswer('q4', 'A')">
+                        A. Easier installation
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="B" onchange="checkAnswer('q4', 'B')">
+                        B. Reduces interference and crosstalk
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="C" onchange="checkAnswer('q4', 'C')">
+                        C. Makes cables waterproof
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="D" onchange="checkAnswer('q4', 'D')">
+                        D. Increases weight for durability
+                    </label>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+            </div>
+
+            <div class="question">
+                <h3>5. Which cable category is now largely obsolete but supported up to 10 Mbps?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="A" onchange="checkAnswer('q5', 'A')">
+                        A. Cat5
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="B" onchange="checkAnswer('q5', 'B')">
+                        B. Cat3
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="C" onchange="checkAnswer('q5', 'C')">
+                        C. Cat6
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="D" onchange="checkAnswer('q5', 'D')">
+                        D. Cat5e
+                    </label>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+            </div>
+
+            <div class="question">
+                <h3>6. Which of the following cable types supports 10 Gbps at up to 100 meters?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q6" value="A" onchange="checkAnswer('q6', 'A')">
+                        A. Cat6
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="B" onchange="checkAnswer('q6', 'B')">
+                        B. Cat5e
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="C" onchange="checkAnswer('q6', 'C')">
+                        C. Cat6a
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="D" onchange="checkAnswer('q6', 'D')">
+                        D. Cat7
+                    </label>
+                </div>
+                <div class="feedback" id="feedback6"></div>
+            </div>
+
+            <div class="question">
+                <h3>7. What type of shielding does Cat7 use?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q7" value="A" onchange="checkAnswer('q7', 'A')">
+                        A. None
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="B" onchange="checkAnswer('q7', 'B')">
+                        B. Only foil shielding
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="C" onchange="checkAnswer('q7', 'C')">
+                        C. Shielded individual pairs + overall shield (SFTP)
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="D" onchange="checkAnswer('q7', 'D')">
+                        D. Plastic separators only
+                    </label>
+                </div>
+                <div class="feedback" id="feedback7"></div>
+            </div>
+
+            <div class="question">
+                <h3>8. Which cable is designed for 25–40 Gbps over short distances (30 meters)?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q8" value="A" onchange="checkAnswer('q8', 'A')">
+                        A. Cat6
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="B" onchange="checkAnswer('q8', 'B')">
+                        B. Cat8
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="C" onchange="checkAnswer('q8', 'C')">
+                        C. Cat5e
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="D" onchange="checkAnswer('q8', 'D')">
+                        D. Cat7
+                    </label>
+                </div>
+                <div class="feedback" id="feedback8"></div>
+            </div>
+
+            <div class="question">
+                <h3>9. UTP cables are best for environments with high electrical interference.</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q9" value="True" onchange="checkAnswer('q9', 'True')">
+                        True
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="False" onchange="checkAnswer('q9', 'False')">
+                        False
+                    </label>
+                </div>
+                <div class="feedback" id="feedback9"></div>
+            </div>
+
+            <div class="question">
+                <h3>10. Ethernet cable length is generally limited to 100 meters for copper cables.</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q10" value="True" onchange="checkAnswer('q10', 'True')">
+                        True
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="False" onchange="checkAnswer('q10', 'False')">
+                        False
+                    </label>
+                </div>
+                <div class="feedback" id="feedback10"></div>
+            </div>
+
+            <div id="final-score" class="final-score"></div>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'C',
+            q2: 'B',
+            q3: 'D',
+            q4: 'B',
+            q5: 'B',
+            q6: 'C',
+            q7: 'C',
+            q8: 'B',
+            q9: 'False',
+            q10: 'True'
+        };
+
+        let answeredQuestions = new Set();
+
+        function checkAnswer(questionName, selectedValue) {
+            const feedback = document.getElementById(`feedback${questionName.slice(1)}`);
+            const selectedOption = document.querySelector(`input[name="${questionName}"][value="${selectedValue}"]`);
+            const allOptions = document.querySelectorAll(`input[name="${questionName}"]`);
+            
+            // Reset styles for all options in this question
+            allOptions.forEach(opt => {
+                opt.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            if (selectedValue === correctAnswers[questionName]) {
+                feedback.textContent = '✅ Correct!';
+                feedback.className = 'feedback correct';
+                selectedOption.parentElement.classList.add('correct');
+            } else {
+                feedback.textContent = `❌ Incorrect. The correct answer is: ${correctAnswers[questionName]}`;
+                feedback.className = 'feedback incorrect';
+                selectedOption.parentElement.classList.add('incorrect');
+            }
+            feedback.style.display = 'block';
+
+            // Track answered questions
+            answeredQuestions.add(questionName);
+            
+            // Check if all questions are answered
+            if (answeredQuestions.size === 10) {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            let score = 0;
+            for (let i = 1; i <= 10; i++) {
+                const questionName = `q${i}`;
+                const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+                    score++;
+                }
+            }
+
+            const finalScore = document.getElementById('final-score');
+            finalScore.innerHTML = `
+                <h3>🎉 Quiz Complete!</h3>
+                <p>You got ${score} out of 10 questions correct.</p>
+                ${score === 10 ? '<p>Perfect score! Well done! 🌟</p>' : ''}
+            `;
+            finalScore.style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

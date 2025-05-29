@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Cables</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="progress-bar.css">
+    <style>
+        .cable-section {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #00ffff;
+        }
+
+        .cable-section h2 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .cable-section h3 {
+            color: #00ff00;
+            font-family: 'Orbitron', sans-serif;
+            margin: 20px 0 10px;
+        }
+
+        .cable-section p, .cable-section li {
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .cable-section ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        .cable-section li {
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .cable-section li:before {
+            content: "→";
+            color: #00ffff;
+            position: absolute;
+            left: -20px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #00ffff;
+            padding: 12px;
+            text-align: left;
+            color: #fff;
+        }
+
+        .comparison-table th {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(0, 255, 255, 0.05);
+        }
+
+        .note-box {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 4px solid #00ff00;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .note-box p {
+            color: #00ff00;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔌 Network Cables: Types and Characteristics</h1>
+
+        <div class="cable-section">
+            <h2>📡 Types of Network Cables</h2>
+            <p>Network cables are the physical medium that allows devices to connect and communicate in networks. Different types of cables are used for various networking purposes, each with their own capabilities and limitations.</p>
+        </div>
+
+        <div class="cable-section">
+            <h2>📺 Coaxial Cables</h2>
+            <p>Coaxial cables were among the first types used in computer networks. They consist of:</p>
+            <ul>
+                <li>A central copper conductor</li>
+                <li>An insulating layer</li>
+                <li>A conductive shield (usually braided or foil)</li>
+                <li>An outer protective jacket</li>
+            </ul>
+            <p>These cables are still used in cable television and some internet connections, but they're less common in modern computer networks. The name "coaxial" comes from the fact that the inner conductor and the outer shield share the same axis.</p>
+        </div>
+
+        <div class="cable-section">
+            <h2>🔄 Twisted Pair Cables</h2>
+            <p>Twisted pair cables are the most common type used in computer networks today. They consist of pairs of insulated copper wires twisted together to reduce electromagnetic interference. The twisting helps cancel out external noise and crosstalk (interference between wire pairs).</p>
+            
+            <h3>Types of twisted pair cables:</h3>
+            <ul>
+                <li><strong>UTP</strong> (Unshielded Twisted Pair): No additional shielding, most common for office and home networks</li>
+                <li><strong>FTP</strong> (Foiled Twisted Pair): Has a foil shield around all pairs for better protection</li>
+                <li><strong>STP</strong> (Shielded Twisted Pair): Each pair individually shielded, plus overall shield</li>
+                <li><strong>SFTP</strong> (Shielded Foiled Twisted Pair): Combines individual pair shielding with overall foil shielding</li>
+            </ul>
+        </div>
+
+        <div class="cable-section">
+            <h2>📊 Cable Categories</h2>
+            <p>Twisted pair cables are classified into different categories (Cat) based on their performance characteristics:</p>
+
+            <h3>Cat3</h3>
+            <p>Early Ethernet standard supporting speeds up to 10 Mbps. Contains 4 pairs of wires and was used for 10Base-T networks. Largely obsolete now.</p>
+
+            <h3>Cat5</h3>
+            <p>Improved standard that supports up to 100 Mbps (100Base-TX or Fast Ethernet). Contains 4 twisted pairs and can be used for distances up to 100 meters. Largely replaced by Cat5e.</p>
+
+            <h3>Cat5e</h3>
+            <p>Enhanced version of Cat5 that's designed to reduce crosstalk. Still has 4 twisted pairs but with better performance. Supports Gigabit Ethernet (1000Base-T) at distances up to 100 meters. Very widely used in home and business networks.</p>
+
+            <h3>Cat6</h3>
+            <p>Higher performance cable that supports 10 Gigabit Ethernet (10GBase-T) for limited distances (up to 55 meters). Features more stringent specifications for crosstalk and system noise. Has 4 twisted pairs with a physical separator that isolates each pair to further reduce crosstalk.</p>
+
+            <h3>Cat6a</h3>
+            <p>Augmented Cat6 that supports 10 Gigabit Ethernet at the full 100-meter distance. Features improved shielding and lower crosstalk. The cable is typically thicker and less flexible than Cat6.</p>
+
+            <h3>Cat7</h3>
+            <p>First cable standard to require fully shielded pairs (each pair is individually shielded) plus an overall shield. Supports 10 Gigabit Ethernet and is tested to higher frequencies (600 MHz). Usually uses a GG45 or TERA connector rather than the standard RJ45 connector used in other categories. Built for very high-performance, interference-resistant applications.</p>
+
+            <h3>Cat8</h3>
+            <p>Designed for 25-40 Gbps speeds over shorter distances (30 meters). Used primarily in data centers and for backbone connections.</p>
+        </div>
+
+        <div class="cable-section">
+            <h2>❓ How to Choose the Right Cable?</h2>
+            <p>When selecting network cables, consider:</p>
+            <ul>
+                <li>Required speed: Higher categories support faster data transmission</li>
+                <li>Distance: Longer distances may require higher quality cables</li>
+                <li>Environment: Areas with electrical interference may need shielded cables</li>
+                <li>Future needs: Installing higher category cables now may save money later</li>
+                <li>Budget: Higher performance cables cost more</li>
+            </ul>
+        </div>
+
+        <div class="cable-section">
+            <h2>📈 Performance Comparison</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>Cable Type</th>
+                    <th>UTP/STP</th>
+                    <th>Max Data Transfer</th>
+                    <th>Max Bandwidth</th>
+                </tr>
+                <tr>
+                    <td>Cat3</td>
+                    <td>UTP</td>
+                    <td>10 Mbps</td>
+                    <td>16 MHz</td>
+                </tr>
+                <tr>
+                    <td>Cat5</td>
+                    <td>UTP</td>
+                    <td>100 Mbps</td>
+                    <td>100 MHz</td>
+                </tr>
+                <tr>
+                    <td>Cat5e</td>
+                    <td>UTP</td>
+                    <td>1 Gbps</td>
+                    <td>100 MHz</td>
+                </tr>
+                <tr>
+                    <td>Cat6</td>
+                    <td>UTP or STP</td>
+                    <td>10 Gbps (55m)</td>
+                    <td>250 MHz</td>
+                </tr>
+                <tr>
+                    <td>Cat6a</td>
+                    <td>UTP or STP</td>
+                    <td>10 Gbps</td>
+                    <td>500 MHz</td>
+                </tr>
+                <tr>
+                    <td>Cat7</td>
+                    <td>SFTP</td>
+                    <td>10 Gbps</td>
+                    <td>600 MHz</td>
+                </tr>
+                <tr>
+                    <td>Cat8</td>
+                    <td>SFTP</td>
+                    <td>25/40 Gbps</td>
+                    <td>2 GHz</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="cable-section">
+            <h2>📏 Standard Network Length Limitations</h2>
+            <p>In Ethernet networks, the standard maximum cable length is 100 meters (about 328 feet) for copper-based twisted pair cables. This limitation is part of the Ethernet standard and is based on signal degradation over distance.</p>
+
+            <h3>For longer distances, you might need to use:</h3>
+            <ul>
+                <li>Repeaters - devices that amplify and retransmit the signal</li>
+                <li>Switches or hubs - networking devices that can extend the network</li>
+                <li>Fiber optic cables - which can transmit data over much longer distances (up to several kilometers)</li>
+            </ul>
+
+            <div class="note-box">
+                <p>💡 Cat6a can reliably support 10 Gigabit Ethernet over the full 100-meter distance.</p>
+            </div>
+        </div>
+
+        <div class="cable-section">
+            <h2>💡 Fiber Optic Cables: The Future of Fast Internet</h2>
+            <p>Fiber optic cables are super-thin strands of glass or plastic that send data using light, not electricity. That means faster speeds, longer distances, and no signal issues from electrical noise.</p>
+
+            <h3>Two Main Types:</h3>
+            <div class="cable-section">
+                <h4>🔹 Single-Mode Fiber</h4>
+                <ul>
+                    <li>Tiny core (about the size of a human hair!)</li>
+                    <li>Sends light in one straight path</li>
+                    <li>Great for long distances (up to 100 km!)</li>
+                    <li>Uses laser light</li>
+                    <li>Perfect for phone companies and big networks</li>
+                </ul>
+            </div>
+
+            <div class="cable-section">
+                <h4>🔸 Multi-Mode Fiber</h4>
+                <ul>
+                    <li>Thicker core</li>
+                    <li>Light bounces around inside in many paths</li>
+                    <li>Best for shorter distances (up to 2 km)</li>
+                    <li>Uses LED lights</li>
+                    <li>Common in office buildings and campuses</li>
+                </ul>
+            </div>
+
+            <h3>🚀 Why Fiber Rocks</h3>
+            <ul>
+                <li>Super fast with huge bandwidth</li>
+                <li>Works over long distances without losing quality</li>
+                <li>Not affected by electromagnetic noise</li>
+                <li>Hard to hack = better security</li>
+                <li>Ready for the future of the internet</li>
+            </ul>
+
+            <h3>⚠️ A Few Downsides</h3>
+            <ul>
+                <li>Can be more expensive than copper cables</li>
+                <li>Needs trained pros to install</li>
+                <li>Can break if bent too much</li>
+            </ul>
+        </div>
+
+        <div class="cable-section">
+            <h2>🛰 First Ocean Connection – The Operation That Changed the World</h2>
+            <p>In the 1980s, telecom companies from Europe and the U.S. wanted to connect the continents with an undersea fiber optic cable. It wasn't easy – the project involved special ships, ocean depths of several thousand meters, and enormous underwater pressure.</p>
+
+            <p>But in 1988, <strong>TAT-8</strong> was laid – the first fiber optic cable linking America and Europe. The result? A massive boost in the speed and quality of international calls, and eventually – a huge boom in global internet connectivity.</p>
+
+            <p>It was a turning point: the world started to feel smaller and more connected than ever.</p>
+        </div>
+
+        <div class="cable-section">
+            <h2>📝 Test Your Knowledge</h2>
+            <p>Take this quiz to check your understanding of network cables and their characteristics.</p>
+
+            <div class="quiz-container">
+                <div class="question">
+                    <h3>1. What is the main purpose of network cables?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="A" onchange="checkAnswer('q1', 'A')">
+                            A. To store data
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="B" onchange="checkAnswer('q1', 'B')">
+                            B. To connect wireless devices
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="C" onchange="checkAnswer('q1', 'C')">
+                            C. To allow devices to connect and communicate in networks
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="D" onchange="checkAnswer('q1', 'D')">
+                            D. To provide backup power
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback1"></div>
+                </div>
+
+                <div class="question">
+                    <h3>2. What does the term "coaxial" refer to?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q2" value="A" onchange="checkAnswer('q2', 'A')">
+                            A. The type of connector used
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="B" onchange="checkAnswer('q2', 'B')">
+                            B. A shared axis between the conductor and shield
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="C" onchange="checkAnswer('q2', 'C')">
+                            C. Fiber alignment
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q2" value="D" onchange="checkAnswer('q2', 'D')">
+                            D. Wireless communication
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback2"></div>
+                </div>
+
+                <div class="question">
+                    <h3>3. Which type of twisted pair cable has no shielding?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q3" value="A" onchange="checkAnswer('q3', 'A')">
+                            A. STP
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="B" onchange="checkAnswer('q3', 'B')">
+                            B. FTP
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="C" onchange="checkAnswer('q3', 'C')">
+                            C. SFTP
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q3" value="D" onchange="checkAnswer('q3', 'D')">
+                            D. UTP
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback3"></div>
+                </div>
+
+                <div class="question">
+                    <h3>4. What is the main advantage of twisting wires in a twisted pair cable?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q4" value="A" onchange="checkAnswer('q4', 'A')">
+                            A. Easier installation
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="B" onchange="checkAnswer('q4', 'B')">
+                            B. Reduces interference and crosstalk
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="C" onchange="checkAnswer('q4', 'C')">
+                            C. Makes cables waterproof
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q4" value="D" onchange="checkAnswer('q4', 'D')">
+                            D. Increases weight for durability
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback4"></div>
+                </div>
+
+                <div class="question">
+                    <h3>5. Which cable category is now largely obsolete but supported up to 10 Mbps?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q5" value="A" onchange="checkAnswer('q5', 'A')">
+                            A. Cat5
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="B" onchange="checkAnswer('q5', 'B')">
+                            B. Cat3
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="C" onchange="checkAnswer('q5', 'C')">
+                            C. Cat6
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q5" value="D" onchange="checkAnswer('q5', 'D')">
+                            D. Cat5e
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback5"></div>
+                </div>
+
+                <div class="question">
+                    <h3>6. Which of the following cable types supports 10 Gbps at up to 100 meters?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q6" value="A" onchange="checkAnswer('q6', 'A')">
+                            A. Cat6
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="B" onchange="checkAnswer('q6', 'B')">
+                            B. Cat5e
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="C" onchange="checkAnswer('q6', 'C')">
+                            C. Cat6a
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q6" value="D" onchange="checkAnswer('q6', 'D')">
+                            D. Cat7
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback6"></div>
+                </div>
+
+                <div class="question">
+                    <h3>7. What type of shielding does Cat7 use?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q7" value="A" onchange="checkAnswer('q7', 'A')">
+                            A. None
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="B" onchange="checkAnswer('q7', 'B')">
+                            B. Only foil shielding
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="C" onchange="checkAnswer('q7', 'C')">
+                            C. Shielded individual pairs + overall shield (SFTP)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q7" value="D" onchange="checkAnswer('q7', 'D')">
+                            D. Plastic separators only
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback7"></div>
+                </div>
+
+                <div class="question">
+                    <h3>8. Which cable is designed for 25–40 Gbps over short distances (30 meters)?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q8" value="A" onchange="checkAnswer('q8', 'A')">
+                            A. Cat6
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="B" onchange="checkAnswer('q8', 'B')">
+                            B. Cat8
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="C" onchange="checkAnswer('q8', 'C')">
+                            C. Cat5e
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q8" value="D" onchange="checkAnswer('q8', 'D')">
+                            D. Cat7
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback8"></div>
+                </div>
+
+                <div class="question">
+                    <h3>9. UTP cables are best for environments with high electrical interference.</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q9" value="True" onchange="checkAnswer('q9', 'True')">
+                            True
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q9" value="False" onchange="checkAnswer('q9', 'False')">
+                            False
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback9"></div>
+                </div>
+
+                <div class="question">
+                    <h3>10. Ethernet cable length is generally limited to 100 meters for copper cables.</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q10" value="True" onchange="checkAnswer('q10', 'True')">
+                            True
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q10" value="False" onchange="checkAnswer('q10', 'False')">
+                            False
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback10"></div>
+                </div>
+
+                <div class="question">
+                    <h3>11. What is the main advantage of single-mode fiber optic cables?</h3>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q11" value="A" onchange="checkAnswer('q11', 'A')">
+                            A. Lower cost
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="B" onchange="checkAnswer('q11', 'B')">
+                            B. Longer transmission distances
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="C" onchange="checkAnswer('q11', 'C')">
+                            C. Easier installation
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q11" value="D" onchange="checkAnswer('q11', 'D')">
+                            D. Better for short distances
+                        </label>
+                    </div>
+                    <div class="feedback" id="feedback11"></div>
+                </div>
+
+                <div id="final-score" class="final-score"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="progress-bar.js"></script>
+    <script>
+        const correctAnswers = {
+            q1: 'C',
+            q2: 'B',
+            q3: 'D',
+            q4: 'B',
+            q5: 'B',
+            q6: 'C',
+            q7: 'C',
+            q8: 'B',
+            q9: 'False',
+            q10: 'True',
+            q11: 'B'
+        };
+
+        let answeredQuestions = new Set();
+
+        function checkAnswer(questionName, selectedValue) {
+            const feedback = document.getElementById(`feedback${questionName.slice(1)}`);
+            const selectedOption = document.querySelector(`input[name="${questionName}"][value="${selectedValue}"]`);
+            const allOptions = document.querySelectorAll(`input[name="${questionName}"]`);
+            
+            // Reset styles for all options in this question
+            allOptions.forEach(opt => {
+                opt.parentElement.classList.remove('correct', 'incorrect');
+            });
+
+            if (selectedValue === correctAnswers[questionName]) {
+                feedback.textContent = '✅ Correct!';
+                feedback.className = 'feedback correct';
+                selectedOption.parentElement.classList.add('correct');
+            } else {
+                feedback.textContent = `❌ Incorrect. The correct answer is: ${correctAnswers[questionName]}`;
+                feedback.className = 'feedback incorrect';
+                selectedOption.parentElement.classList.add('incorrect');
+            }
+            feedback.style.display = 'block';
+
+            // Track answered questions
+            answeredQuestions.add(questionName);
+            
+            // Check if all questions are answered
+            if (answeredQuestions.size === 11) {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            let score = 0;
+            for (let i = 1; i <= 11; i++) {
+                const questionName = `q${i}`;
+                const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+                    score++;
+                }
+            }
+
+            const finalScore = document.getElementById('final-score');
+            finalScore.innerHTML = `
+                <h3>🎉 Quiz Complete!</h3>
+                <p>You got ${score} out of 11 questions correct.</p>
+                ${score === 11 ? '<p>Perfect score! Well done! 🌟</p>' : ''}
+            `;
+            finalScore.style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

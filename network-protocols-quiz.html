@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Protocols Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .question-container {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+        .question-container.active {
+            display: block;
+        }
+        .question {
+            color: #00ffff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .option {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00ffff;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            background: rgba(0, 255, 255, 0.1);
+        }
+        .option.selected {
+            background: rgba(0, 255, 255, 0.2);
+        }
+        .option.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+        }
+        .option.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+        .feedback.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+        .feedback.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .nav-btn {
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 20px 0;
+        }
+        .progress {
+            height: 100%;
+            background: #00ffff;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        .score-display {
+            color: #00ffff;
+            text-align: right;
+            margin-bottom: 10px;
+        }
+
+        /* Cyber Celebration Styles */
+        .celebration-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .celebration-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .celebration-content {
+            text-align: center;
+            color: #fff;
+            transform: scale(0.5);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .celebration-overlay.active .celebration-content {
+            transform: scale(1);
+        }
+
+        .streak-number {
+            font-size: 4em;
+            color: #00ffff;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5),
+                         0 0 20px rgba(0, 255, 255, 0.3),
+                         0 0 30px rgba(0, 255, 255, 0.2);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .streak-title {
+            font-size: 2em;
+            color: #fff;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .streak-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #00ffff;
+            animation: line 2s ease-in-out infinite;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .matrix-column {
+            position: absolute;
+            top: -100%;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px #0f0;
+            animation: matrix-rain linear infinite;
+        }
+
+        /* Circuit Pattern */
+        .circuit-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            animation: circuit 2s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Animations */
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.8),
+                             0 0 30px rgba(0, 255, 255, 0.6),
+                             0 0 40px rgba(0, 255, 255, 0.4); }
+            100% { text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+        }
+
+        @keyframes line {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes circuit {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+
+        /* Firework Animation */
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: firework 1s ease-out forwards;
+        }
+
+        @keyframes firework {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+
+        /* Streak Counter Styles */
+        .streak-counter {
+            color: #00ffff;
+            text-align: right;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>🌐 Network Protocols Quiz</h1>
+        <div class="score-display">Score: <span id="score">0</span>/20</div>
+        <div class="streak-counter">🔥 Streak: <span id="streak">0</span></div>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div id="questions-container">
+            <!-- Questions will be inserted here by JavaScript -->
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn" disabled>← Previous</button>
+            <button class="nav-btn" id="next-btn">Next →</button>
+        </div>
+    </div>
+
+    <!-- Celebration Overlay -->
+    <div class="celebration-overlay" id="celebration-overlay">
+        <div class="celebration-content">
+            <h2 class="streak-number" id="streak-number"></h2>
+            <h3 class="streak-title" id="streak-title"></h3>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "What is TCP/IP often compared to?",
+                options: [
+                    "A recipe book for cooking",
+                    "A set of traffic rules for the internet",
+                    "A dictionary for computer words",
+                    "A map of the internet"
+                ],
+                correct: 1,
+                explanation: "TCP/IP is like a set of traffic rules that help computers communicate on the internet, just like traffic rules help cars move safely on roads."
+            },
+            {
+                question: "Which of these is a valid IPv4 address?",
+                options: [
+                    "192.168.1.256",
+                    "192.168.1.1",
+                    "192.168.1",
+                    "192.168.1.1.1"
+                ],
+                correct: 1,
+                explanation: "IPv4 addresses must be in the format x.x.x.x where x is a number between 0 and 255."
+            },
+            {
+                question: "What does ARP help computers find?",
+                options: [
+                    "The fastest route to a website",
+                    "The MAC address that matches an IP address",
+                    "The best internet service provider",
+                    "The nearest router"
+                ],
+                correct: 1,
+                explanation: "ARP (Address Resolution Protocol) helps computers find the MAC address that corresponds to an IP address on the local network."
+            },
+            {
+                question: "Why is the ARP cache useful?",
+                options: [
+                    "It makes your computer run faster",
+                    "It saves time by remembering previous lookups",
+                    "It protects your network from hackers",
+                    "It helps you find websites faster"
+                ],
+                correct: 1,
+                explanation: "The ARP cache stores recently resolved IP-to-MAC address mappings, so computers don't have to ask for the same information repeatedly."
+            },
+            {
+                question: "When you send a message to someone on the same WiFi network, what happens?",
+                options: [
+                    "The message goes through the internet",
+                    "The message goes directly to their device",
+                    "The message is stored in the cloud first",
+                    "The message is converted to a different format"
+                ],
+                correct: 1,
+                explanation: "On the same network, devices can communicate directly with each other without going through the internet."
+            },
+            {
+                question: "What happens when you use the 'ping' command?",
+                options: [
+                    "Your computer sends a test message and waits for a reply",
+                    "Your computer downloads a file",
+                    "Your computer connects to a website",
+                    "Your computer checks for updates"
+                ],
+                correct: 0,
+                explanation: "The ping command uses ICMP to send a test message and measure how long it takes to get a response."
+            },
+            {
+                question: "When would IGMP be most useful?",
+                options: [
+                    "Sending an email to one person",
+                    "Watching a live stream with friends on the same network",
+                    "Downloading a file from a website",
+                    "Playing a single-player game"
+                ],
+                correct: 1,
+                explanation: "IGMP is used for multicast communication, which is perfect for streaming content to multiple devices on the same network."
+            },
+            {
+                question: "Why might UDP be better than TCP for online gaming?",
+                options: [
+                    "It's more secure",
+                    "It's faster, even if some data gets lost",
+                    "It uses less internet data",
+                    "It works better with wireless networks"
+                ],
+                correct: 1,
+                explanation: "UDP is faster because it doesn't wait for confirmation of delivery, which is more important for real-time gaming than perfect data delivery."
+            },
+            {
+                question: "When would you want to use TCP instead of UDP?",
+                options: [
+                    "When playing a fast-paced online game",
+                    "When sending an important email",
+                    "When watching a live stream",
+                    "When making a phone call"
+                ],
+                correct: 1,
+                explanation: "TCP is better for important data that must be delivered correctly, like emails, where accuracy is more important than speed."
+            },
+            {
+                question: "What's the main purpose of the TCP three-way handshake?",
+                options: [
+                    "To make the connection faster",
+                    "To make sure both devices are ready to communicate",
+                    "To encrypt the connection",
+                    "To save bandwidth"
+                ],
+                correct: 1,
+                explanation: "The three-way handshake ensures both devices are ready and able to communicate before starting data transfer."
+            },
+            {
+                question: "Why does TCP use a sliding window?",
+                options: [
+                    "To make the connection more secure",
+                    "To prevent overwhelming the receiving device",
+                    "To save memory on the computer",
+                    "To make the connection faster"
+                ],
+                correct: 1,
+                explanation: "The sliding window helps manage data flow by sending only what the receiver can handle, preventing overload."
+            },
+            {
+                question: "What's the main purpose of ports?",
+                options: [
+                    "To make the internet faster",
+                    "To help your device know which application should handle incoming data",
+                    "To protect your computer from viruses",
+                    "To save internet data"
+                ],
+                correct: 1,
+                explanation: "Ports help direct incoming data to the correct application on your device, like different doors for different services."
+            },
+            {
+                question: "Which port is typically used for secure web browsing (HTTPS)?",
+                options: [
+                    "Port 80",
+                    "Port 443",
+                    "Port 22",
+                    "Port 25"
+                ],
+                correct: 1,
+                explanation: "Port 443 is the standard port for HTTPS, which provides secure web browsing."
+            },
+            {
+                question: "What happens if a UDP packet gets lost?",
+                options: [
+                    "The sender automatically resends it",
+                    "The data is lost permanently",
+                    "The connection is terminated",
+                    "The receiver requests a resend"
+                ],
+                correct: 1,
+                explanation: "UDP doesn't guarantee delivery, so lost packets are not automatically resent."
+            },
+            {
+                question: "Which protocol is connection-oriented?",
+                options: [
+                    "UDP",
+                    "TCP",
+                    "ICMP",
+                    "IGMP"
+                ],
+                correct: 1,
+                explanation: "TCP is connection-oriented, meaning it establishes a connection before sending data and ensures reliable delivery."
+            },
+            {
+                question: "What does the 'ping' command use to test connectivity?",
+                options: [
+                    "TCP",
+                    "UDP",
+                    "ICMP",
+                    "ARP"
+                ],
+                correct: 2,
+                explanation: "The ping command uses ICMP (Internet Control Message Protocol) to test network connectivity."
+            },
+            {
+                question: "Which protocol would be best for streaming video?",
+                options: [
+                    "TCP",
+                    "UDP",
+                    "ICMP",
+                    "ARP"
+                ],
+                correct: 1,
+                explanation: "UDP is better for streaming video because it's faster and can handle some packet loss without affecting the viewing experience."
+            },
+            {
+                question: "What happens during the TCP three-way handshake?",
+                options: [
+                    "Data is encrypted",
+                    "Both devices confirm they can communicate",
+                    "The connection speed is tested",
+                    "The network path is optimized"
+                ],
+                correct: 1,
+                explanation: "The three-way handshake is a process where both devices confirm they can send and receive data before starting communication."
+            },
+            {
+                question: "Which protocol would you use for a video conference?",
+                options: [
+                    "TCP",
+                    "UDP",
+                    "ICMP",
+                    "ARP"
+                ],
+                correct: 1,
+                explanation: "UDP is typically used for video conferencing because it's better for real-time communication where some packet loss is acceptable."
+            },
+            {
+                question: "What's the purpose of the ARP cache?",
+                options: [
+                    "To store website passwords",
+                    "To remember IP-to-MAC address mappings",
+                    "To speed up internet browsing",
+                    "To protect against viruses"
+                ],
+                correct: 1,
+                explanation: "The ARP cache stores recently resolved IP-to-MAC address mappings to avoid having to ask for the same information repeatedly."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+        let streak = 0;
+        let shuffledQuestions = [];
+
+        // Celebration titles
+        const celebrationTitles = [
+            "Firewall Whisperer",
+            "Patch Master",
+            "Digital Ninja",
+            "The Exploit Exorcist",
+            "Byte Guardian",
+            "Root Access Royalty",
+            "Crypto Commander",
+            "Phish Slayer",
+            "Zero-Day Hero",
+            "The Encryptor",
+            "Net Sentinel",
+            "Red Team Rockstar",
+            "The Bug Hunter",
+            "Token Titan",
+            "Cyber Sage",
+            "Packet Paladin",
+            "Malware Mercenary",
+            "The Boolean Boss",
+            "Code Shield",
+            "The Kernel Keeper"
+        ];
+
+        // Create firework particles
+        function createFirework(x, y) {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            for (let i = 0; i < 30; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 100 + Math.random() * 100;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                firework.style.setProperty('--tx', tx + 'px');
+                firework.style.setProperty('--ty', ty + 'px');
+                
+                document.body.appendChild(firework);
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        // Create matrix rain effect
+        function createMatrixRain() {
+            const matrixContainer = document.createElement('div');
+            matrixContainer.className = 'matrix-rain';
+            
+            for (let i = 0; i < 20; i++) {
+                const column = document.createElement('div');
+                column.className = 'matrix-column';
+                column.style.left = `${i * 5}%`;
+                column.style.animationDuration = `${1 + Math.random() * 2}s`;
+                column.style.animationDelay = `${Math.random() * 2}s`;
+                
+                const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+                let content = '';
+                for (let j = 0; j < 20; j++) {
+                    content += chars[Math.floor(Math.random() * chars.length)] + '<br>';
+                }
+                column.innerHTML = content;
+                
+                matrixContainer.appendChild(column);
+            }
+            
+            return matrixContainer;
+        }
+
+        // Create circuit pattern
+        function createCircuitPattern() {
+            const circuit = document.createElement('div');
+            circuit.className = 'circuit-pattern';
+            return circuit;
+        }
+
+        // Show celebration
+        function showCelebration(streakCount) {
+            const overlay = document.createElement('div');
+            overlay.className = 'celebration-overlay';
+            overlay.id = 'celebration-overlay';
+            
+            // Add cyber effects
+            overlay.appendChild(createMatrixRain());
+            overlay.appendChild(createCircuitPattern());
+            
+            // Add content
+            const content = document.createElement('div');
+            content.className = 'celebration-content';
+            content.innerHTML = `
+                <h2 class="streak-number">Streak ${streakCount}!</h2>
+                <h3 class="streak-title">${celebrationTitles[Math.floor(Math.random() * celebrationTitles.length)]}</h3>
+            `;
+            overlay.appendChild(content);
+            
+            // Add to document
+            document.body.appendChild(overlay);
+            
+            // Trigger animation
+            requestAnimationFrame(() => {
+                overlay.classList.add('active');
+            });
+            
+            // Create fireworks
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createFirework(x, y);
+                }, i * 150);
+            }
+            
+            // Remove celebration after 2 seconds
+            setTimeout(() => {
+                overlay.classList.remove('active');
+                setTimeout(() => overlay.remove(), 300);
+            }, 2000);
+        }
+
+        // Shuffle questions array
+        function shuffleQuestions() {
+            shuffledQuestions = [...questions];
+            for (let i = shuffledQuestions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledQuestions[i], shuffledQuestions[j]] = [shuffledQuestions[j], shuffledQuestions[i]];
+            }
+        }
+
+        // Initialize quiz with shuffled questions
+        function initializeQuiz() {
+            shuffleQuestions();
+            const container = document.getElementById('questions-container');
+            container.innerHTML = ''; // Clear existing questions
+            shuffledQuestions.forEach((question, index) => {
+                container.appendChild(createQuestionElement(question, index));
+            });
+            showQuestion(0);
+        }
+
+        function createQuestionElement(question, index) {
+            const div = document.createElement('div');
+            div.className = 'question-container';
+            div.id = `question-${index}`;
+            
+            // Create a copy of options array and shuffle it
+            const shuffledOptions = [...question.options];
+            const correctAnswer = shuffledOptions[question.correct];
+            
+            // Remove the correct answer and shuffle the rest
+            shuffledOptions.splice(question.correct, 1);
+            for (let i = shuffledOptions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+            }
+            
+            // Insert correct answer at random position
+            const correctPosition = Math.floor(Math.random() * (shuffledOptions.length + 1));
+            shuffledOptions.splice(correctPosition, 0, correctAnswer);
+            
+            // Update the correct answer index
+            question.correct = correctPosition;
+            
+            div.innerHTML = `
+                <div class="question">${index + 1}. ${question.question}</div>
+                <ul class="options">
+                    ${shuffledOptions.map((option, i) => `
+                        <li class="option" data-index="${i}">${option}</li>
+                    `).join('')}
+                </ul>
+                <div class="feedback"></div>
+            `;
+            
+            return div;
+        }
+
+        function showQuestion(index) {
+            document.querySelectorAll('.question-container').forEach(q => q.classList.remove('active'));
+            document.getElementById(`question-${index}`).classList.add('active');
+            updateNavigation();
+            updateProgress();
+        }
+
+        function updateNavigation() {
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').disabled = !answered;
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / shuffledQuestions.length) * 100;
+            document.getElementById('progress').style.width = `${progress}%`;
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+        }
+
+        function handleAnswer(questionIndex, selectedIndex) {
+            const question = shuffledQuestions[questionIndex];
+            const options = document.querySelectorAll(`#question-${questionIndex} .option`);
+            const feedback = document.querySelector(`#question-${questionIndex} .feedback`);
+            
+            options.forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                option.style.pointerEvents = 'none';
+            });
+
+            const selectedOption = options[selectedIndex];
+            selectedOption.classList.add('selected');
+
+            if (selectedIndex === question.correct) {
+                selectedOption.classList.add('correct');
+                feedback.textContent = `Correct! ${question.explanation}`;
+                feedback.className = 'feedback correct';
+                score++;
+                updateScore();
+                streak++;
+                document.getElementById('streak').textContent = streak;
+                
+                // Check for streak celebration
+                if (streak % 5 === 0) {
+                    showCelebration(streak);
+                }
+            } else {
+                selectedOption.classList.add('incorrect');
+                options[question.correct].classList.add('correct');
+                feedback.textContent = `Incorrect. ${question.explanation}`;
+                feedback.className = 'feedback incorrect';
+                streak = 0;
+                document.getElementById('streak').textContent = streak;
+            }
+
+            feedback.style.display = 'block';
+            answered = true;
+            updateNavigation();
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeQuiz();
+
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    if (!answered) {
+                        const questionIndex = parseInt(this.closest('.question-container').id.split('-')[1]);
+                        const selectedIndex = parseInt(this.dataset.index);
+                        handleAnswer(questionIndex, selectedIndex);
+                    }
+                });
+            });
+
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    answered = false;
+                    showQuestion(currentQuestion);
+                }
+            });
+
+            document.getElementById('next-btn').addEventListener('click', () => {
+                if (currentQuestion < shuffledQuestions.length - 1) {
+                    currentQuestion++;
+                    answered = false;
+                    showQuestion(currentQuestion);
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

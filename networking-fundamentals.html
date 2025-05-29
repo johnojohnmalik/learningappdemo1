@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Computer Networking Fundamentals</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="progress-bar.css">
+  <style>
+    .section {
+      background-color: var(--light-bg);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .section h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+      text-shadow: var(--glow);
+    }
+
+    .section p {
+      margin-bottom: 15px;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .feature-list li {
+      margin: 15px 0;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 5px;
+      border: 1px solid rgba(0, 204, 255, 0.2);
+      color: var(--text-color);
+    }
+
+    .feature-list li strong {
+      color: var(--secondary-color);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .emoji {
+      font-size: 1.2em;
+      margin-right: 10px;
+    }
+
+    .highlight {
+      color: var(--accent-color);
+      font-weight: bold;
+    }
+
+    .quiz-section {
+      background-color: var(--light-bg);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent-color);
+    }
+
+    .quiz-question {
+      margin-bottom: 20px;
+    }
+
+    .quiz-question label {
+      display: block;
+      margin: 10px 0;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    .quiz-question input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .feedback.correct {
+      background-color: rgba(0, 255, 102, 0.15);
+      border: 1px solid var(--correct-color);
+      color: var(--correct-color);
+    }
+
+    .feedback.incorrect {
+      background-color: rgba(255, 51, 102, 0.15);
+      border: 1px solid var(--wrong-color);
+      color: var(--wrong-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h1>Computer Networking Fundamentals</h1>
+
+    <div class="section">
+      <h2>💬 What is Communication?</h2>
+      <p>Communication is the transfer of information between two or more entities. In the computing world, communication allows computers and electronic devices to share information, files, and resources with each other.</p>
+    </div>
+
+    <div class="section">
+      <h2>🌐 What is a Computer Network?</h2>
+      <p>A computer network is a system that connects two or more computers, enabling them to communicate and share resources. Networks can be small (like a home network) or massive (like the global internet).</p>
+    </div>
+
+    <div class="section">
+      <h2>🎯 What are Computer Networks Used For?</h2>
+      <ul class="feature-list">
+        <li><span class="emoji">📁</span> Sharing files and information between users</li>
+        <li><span class="emoji">🖨️</span> Sharing resources like printers and scanners</li>
+        <li><span class="emoji">💬</span> Communication between people (email, chat, video calls)</li>
+        <li><span class="emoji">☁️</span> Access to remote information (websites, cloud services)</li>
+        <li><span class="emoji">🎮</span> Online gaming and entertainment</li>
+        <li><span class="emoji">💼</span> Remote work and access to organizational resources</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>⚙️ How Does a Computer Network Work?</h2>
+      <p>Computer networks operate using specialized hardware and software. Computers are connected physically (via cables) or wirelessly (WiFi), and use protocols (communication rules) to understand each other. Information is transferred in small packets sent from the source to the destination through various paths in the network.</p>
+    </div>
+
+    <div class="section">
+      <h2>🔌 How Do Computers Communicate With Each Other?</h2>
+      <p>Computers communicate using communication protocols, which are like shared "languages." The most common protocol is TCP/IP (Transmission Control Protocol/Internet Protocol), which powers the internet. Each computer on a network is identified by a unique IP address, similar to a home address in the physical world.</p>
+    </div>
+
+    <div class="section">
+      <h2>🖥️ Endpoints in Networks</h2>
+      <p>Endpoints are devices connected to a network that users use to send or receive information. Examples include:</p>
+      
+      <div class="layer">
+        <h3>Personal Computer (PC)</h3>
+        <p>A computer for personal use at home or in the office. Used for work, internet browsing, gaming, and more.</p>
+      </div>
+
+      <div class="layer">
+        <h3>Workstation</h3>
+        <p>A more powerful computer than a regular PC, designed for demanding tasks like graphic design, engineering, or software development.</p>
+      </div>
+
+      <div class="layer">
+        <h3>Server</h3>
+        <p>A specialized computer that provides services to other computers on the network. For example: a web server hosts websites, a file server stores shared files.</p>
+      </div>
+
+      <div class="layer">
+        <h3>Virtual Machine (VM)</h3>
+        <p>Software that simulates a complete computer, allowing you to run a separate operating system inside an existing physical computer.</p>
+      </div>
+
+      <div class="layer">
+        <h3>What Are Virtual Machines Used For?</h3>
+        <ul>
+          <li>🔒 Safe Testing – Run software or code in an isolated environment</li>
+          <li>🧪 Experimentation – Try different operating systems</li>
+          <li>🛠️ Development – Test apps on different systems</li>
+          <li>☁️ Cloud Computing – Power cloud platforms</li>
+          <li>👨‍💻 Cybersecurity Practice – Learn in virtual labs</li>
+          <li>🔄 Snapshots & Rollbacks – Easy system recovery</li>
+          <li>💼 Run Legacy Software – Use old programs safely</li>
+          <li>👥 Multiple Users – Run several VMs on one computer</li>
+        </ul>
+      </div>
+
+      <div class="layer" style="margin-top: 30px;">
+        <h3>Mobile Devices</h3>
+        <p>Portable devices that connect to the network for internet access and various services.</p>
+      </div>
+
+      <div class="layer">
+        <h3>Internet of Things (IoT)</h3>
+        <p>Everyday devices connected to the internet, such as security cameras, smart watches, smart TV, etc.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>💻 Operating Systems</h2>
+      <p>Software that manages the computer and allows other software to run. Common operating systems include Windows, macOS, Linux, Android, and iOS. They include built-in networking capabilities that allow the computer to communicate with other computers.</p>
+
+      <div class="layer">
+        <h3>What Does an Operating System Do?</h3>
+        <ol>
+          <li><strong>Resource Management</strong> - Controls and allocates computer resources</li>
+          <li><strong>Scheduling</strong> - Manages CPU access for processes</li>
+          <li><strong>User Interface</strong> - Provides GUI or CLI for user interaction</li>
+          <li><strong>Application Programming Interface (API)</strong> - Enables app development</li>
+          <li><strong>File System Management</strong> - Organizes and manages files</li>
+          <li><strong>Device Drivers</strong> - Controls hardware devices</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h2>🧠 Test Your Knowledge</h2>
+      
+      <div class="quiz-question">
+        <p>What is a computer network used for?</p>
+        <label>
+          <input type="radio" name="q1" value="A"> A. Playing games only
+        </label>
+        <label>
+          <input type="radio" name="q1" value="B"> B. Connecting computers to share files and resources
+        </label>
+        <label>
+          <input type="radio" name="q1" value="C"> C. Making your computer faster
+        </label>
+        <div class="feedback" id="feedback1"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>How do computers communicate with each other in a network?</p>
+        <label>
+          <input type="radio" name="q2" value="A"> A. Using communication protocols like TCP/IP
+        </label>
+        <label>
+          <input type="radio" name="q2" value="B"> B. By yelling at each other through speakers
+        </label>
+        <label>
+          <input type="radio" name="q2" value="C"> C. Through USB sticks
+        </label>
+        <div class="feedback" id="feedback2"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>What is a Virtual Machine (VM)?</p>
+        <label>
+          <input type="radio" name="q3" value="A"> A. A special type of printer
+        </label>
+        <label>
+          <input type="radio" name="q3" value="B"> B. A fake image stored on your screen
+        </label>
+        <label>
+          <input type="radio" name="q3" value="C"> C. A simulated computer that runs inside another computer
+        </label>
+        <div class="feedback" id="feedback3"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>Which of these is an example of an endpoint in a network?</p>
+        <label>
+          <input type="radio" name="q4" value="A"> A. A keyboard
+        </label>
+        <label>
+          <input type="radio" name="q4" value="B"> B. A personal computer (PC)
+        </label>
+        <label>
+          <input type="radio" name="q4" value="C"> C. A power cable
+        </label>
+        <div class="feedback" id="feedback4"></div>
+      </div>
+
+      <div class="quiz-question">
+        <p>What is one of the main jobs of an operating system?</p>
+        <label>
+          <input type="radio" name="q5" value="A"> A. Cleaning your desk
+        </label>
+        <label>
+          <input type="radio" name="q5" value="B"> B. Managing computer resources like memory and CPU
+        </label>
+        <label>
+          <input type="radio" name="q5" value="C"> C. Connecting the computer to electricity
+        </label>
+        <div class="feedback" id="feedback5"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Quiz answers
+    const answers = {
+      q1: 'B',
+      q2: 'A',
+      q3: 'C',
+      q4: 'B',
+      q5: 'B'
+    };
+
+    // Add event listeners to all radio buttons
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        const questionName = this.name;
+        const selectedAnswer = this.value;
+        const feedback = document.getElementById('feedback' + questionName.slice(1));
+        
+        if (selectedAnswer === answers[questionName]) {
+          feedback.textContent = '✅ Correct!';
+          feedback.className = 'feedback correct';
+        } else {
+          feedback.textContent = '❌ Incorrect. Try again!';
+          feedback.className = 'feedback incorrect';
+        }
+        feedback.style.display = 'block';
+      });
+    });
+  </script>
+  <script src="progress-bar.js"></script>
+</body>
+</html> 

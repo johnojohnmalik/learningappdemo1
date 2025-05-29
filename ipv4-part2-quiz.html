@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPv4 Part 2: DHCP & DNS Quiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            margin: 30px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .question-container {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        .question-number {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .option {
+            margin: 10px 0;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .option.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .option.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        .option.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .feedback.incorrect {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .nav-btn {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .progress {
+            text-align: center;
+            color: #00ffff;
+            margin: 20px 0;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        /* Streak Counter Styles */
+        .streak-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .streak-text {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .streak-number {
+            color: #ff00ff;
+            font-weight: bold;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Celebration Styles */
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: none;
+        }
+
+        .celebration-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            opacity: 0;
+            animation: fadeInOut 4s ease-in-out;
+        }
+
+        .celebration-title {
+            font-size: 0.5em;
+            color: #ff00ff;
+            margin-top: 10px;
+            text-shadow: 0 0 15px rgba(255, 0, 255, 0.8);
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 IPv4 Part 2: DHCP & DNS Quiz</h1>
+        <div class="progress">Question <span id="current-question">1</span> of 30</div>
+        <div class="streak-container" id="streakContainer">
+            <div class="streak-text">Current Streak: <span class="streak-number" id="streakNumber">0</span></div>
+        </div>
+
+        <div class="question-container">
+            <div class="question-number">Question 1</div>
+            <div class="question-text">What was the main problem with BOOTP that DHCP was designed to solve?</div>
+            <ul class="options">
+                <li class="option" data-option="A">A) BOOTP couldn't assign IP addresses</li>
+                <li class="option" data-option="B">B) BOOTP required manual configuration for each device</li>
+                <li class="option" data-option="C">C) BOOTP only worked with Windows computers</li>
+                <li class="option" data-option="D">D) BOOTP was too expensive to implement</li>
+            </ul>
+            <div class="feedback">
+                <div class="feedback-text"></div>
+                <div class="explanation"></div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="nextQuestion()" id="next-btn">Next Question</button>
+        </div>
+    </div>
+
+    <div class="celebration-container" id="celebrationContainer">
+        <div class="celebration-message" id="celebrationMessage">
+            <div id="streakText"></div>
+            <div class="celebration-title" id="titleText"></div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            // BOOTP and DHCP Basics
+            {
+                number: 1,
+                text: "What was the main problem with BOOTP that DHCP was designed to solve?",
+                options: [
+                    "A) BOOTP couldn't assign IP addresses",
+                    "B) BOOTP required manual configuration for each device",
+                    "C) BOOTP only worked with Windows computers",
+                    "D) BOOTP was too expensive to implement"
+                ],
+                correctAnswer: "B",
+                explanation: "BOOTP required network administrators to manually configure each device's IP address, which became impractical as networks grew larger. This limitation led to the development of DHCP, which automates this process."
+            },
+            {
+                number: 2,
+                text: "What is the primary purpose of a DHCP lease?",
+                options: [
+                    "A) To permanently assign IP addresses to devices",
+                    "B) To temporarily assign IP addresses for a specific duration",
+                    "C) To encrypt network traffic",
+                    "D) To block unauthorized devices"
+                ],
+                correctAnswer: "B",
+                explanation: "A DHCP lease ensures that IP addresses are only temporarily assigned to devices, allowing the network to reclaim and reuse addresses when devices disconnect or the lease expires."
+            },
+            // DHCP Process
+            {
+                number: 3,
+                text: "What is the correct sequence of the DHCP process?",
+                options: [
+                    "A) Discover → Offer → Request → Acknowledge",
+                    "B) Request → Offer → Discover → Acknowledge",
+                    "C) Offer → Discover → Request → Acknowledge",
+                    "D) Discover → Request → Offer → Acknowledge"
+                ],
+                correctAnswer: "A",
+                explanation: "The DHCP process follows a four-step sequence: Discover (client broadcasts for servers), Offer (server proposes an address), Request (client accepts the offer), and Acknowledge (server confirms the assignment)."
+            },
+            {
+                number: 4,
+                text: "What happens during the DHCP Discover step?",
+                options: [
+                    "A) The server confirms the IP address assignment",
+                    "B) The client broadcasts a message to find DHCP servers",
+                    "C) The server proposes an available IP address",
+                    "D) The client rejects the offered IP address"
+                ],
+                correctAnswer: "B",
+                explanation: "During the DHCP Discover step, the client broadcasts a message to find available DHCP servers on the network, as it doesn't know which server to contact."
+            },
+            // DHCP Configuration
+            {
+                number: 5,
+                text: "What is the default DHCP lease time in most networks?",
+                options: [
+                    "A) 1 hour",
+                    "B) 24 hours",
+                    "C) 7 days",
+                    "D) 30 days"
+                ],
+                correctAnswer: "B",
+                explanation: "The default DHCP lease time is typically 24 hours, though this can be configured by network administrators based on their specific needs."
+            },
+            {
+                number: 6,
+                text: "What happens if a device can't reach a DHCP server?",
+                options: [
+                    "A) The device will never connect to the network",
+                    "B) The device will assign itself a 169.254.x.x address using APIPA",
+                    "C) The device will use its last known IP address",
+                    "D) The device will automatically create a new network"
+                ],
+                correctAnswer: "B",
+                explanation: "When a device can't reach a DHCP server, it uses Automatic Private IP Addressing (APIPA) to assign itself an address in the 169.254.x.x range, allowing limited local network communication."
+            },
+            // DNS Basics
+            {
+                number: 7,
+                text: "What was the main problem with the early HOSTS.TXT file system?",
+                options: [
+                    "A) It was too expensive to maintain",
+                    "B) It required manual updates for every new computer",
+                    "C) It only worked with specific operating systems",
+                    "D) It was too slow to process requests"
+                ],
+                correctAnswer: "B",
+                explanation: "The HOSTS.TXT file needed to be manually updated on every computer whenever a new host was added to the network, making it impossible to manage as the internet grew."
+            },
+            {
+                number: 8,
+                text: "How many root DNS servers are there in the world?",
+                options: [
+                    "A) 7",
+                    "B) 13",
+                    "C) 21",
+                    "D) 50"
+                ],
+                correctAnswer: "B",
+                explanation: "There are 13 root DNS servers worldwide, which form the foundation of the DNS hierarchy. These servers are strategically located to ensure global internet stability."
+            },
+            // DNS Resolution
+            {
+                number: 9,
+                text: "What is the correct order of DNS resolution when a computer doesn't have the answer in its cache?",
+                options: [
+                    "A) Root Server → TLD Server → Authoritative Server",
+                    "B) Authoritative Server → TLD Server → Root Server",
+                    "C) TLD Server → Root Server → Authoritative Server",
+                    "D) Local DNS → Root Server → TLD Server"
+                ],
+                correctAnswer: "A",
+                explanation: "DNS resolution follows a hierarchical process, starting with the root servers, then moving to the appropriate TLD server, and finally to the authoritative server for the specific domain."
+            },
+            // DNS Records
+            {
+                number: 10,
+                text: "What is the purpose of a DNS A Record?",
+                options: [
+                    "A) To store email server information",
+                    "B) To map a domain name to an IPv4 address",
+                    "C) To create domain aliases",
+                    "D) To store security certificates"
+                ],
+                correctAnswer: "B",
+                explanation: "An A Record is the most basic type of DNS record that maps a domain name to its corresponding IPv4 address, allowing computers to find websites using human-readable names."
+            },
+            {
+                number: 11,
+                text: "What is the purpose of a DNS MX Record?",
+                options: [
+                    "A) To store website IP addresses",
+                    "B) To specify mail server addresses",
+                    "C) To create domain aliases",
+                    "D) To store security information"
+                ],
+                correctAnswer: "B",
+                explanation: "An MX (Mail Exchange) Record tells email servers where to deliver emails for a domain, ensuring that emails reach the correct mail server for processing."
+            },
+            {
+                number: 12,
+                text: "What is the purpose of TTL in DNS records?",
+                options: [
+                    "A) To encrypt DNS queries",
+                    "B) To specify how long a DNS record can be cached",
+                    "C) To limit the number of DNS requests",
+                    "D) To authenticate DNS servers"
+                ],
+                correctAnswer: "B",
+                explanation: "TTL (Time To Live) determines how long DNS resolvers should keep a record in their cache before requesting a fresh copy, helping balance between performance and data freshness."
+            },
+            // DNS Security
+            {
+                number: 13,
+                text: "What is the purpose of a DNS CAA record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify name servers",
+                    "C) To create domain aliases",
+                    "D) To specify certificate authorities"
+                ],
+                correctAnswer: "D",
+                explanation: "A CAA (Certificate Authority Authorization) record specifies which certificate authorities are allowed to issue certificates for a domain, enhancing security by controlling who can issue certificates."
+            },
+            {
+                number: 14,
+                text: "What is the purpose of a DNS DS record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify name servers",
+                    "C) To create domain aliases",
+                    "D) To store DNSSEC information"
+                ],
+                correctAnswer: "D",
+                explanation: "A DS (Delegation Signer) record is used in DNSSEC to establish a chain of trust between parent and child zones, helping prevent DNS spoofing and cache poisoning attacks."
+            },
+            // DHCP Options
+            {
+                number: 15,
+                text: "What is the purpose of DHCP option 3?",
+                options: [
+                    "A) To specify the default gateway",
+                    "B) To set the DNS server",
+                    "C) To configure the subnet mask",
+                    "D) To set the domain name"
+                ],
+                correctAnswer: "A",
+                explanation: "DHCP option 3 is used to specify the default gateway (router) address that clients should use to reach other networks, essential for internet connectivity."
+            },
+            {
+                number: 16,
+                text: "What is the purpose of DHCP option 6?",
+                options: [
+                    "A) To specify the default gateway",
+                    "B) To set the DNS server",
+                    "C) To configure the subnet mask",
+                    "D) To set the domain name"
+                ],
+                correctAnswer: "B",
+                explanation: "DHCP option 6 is used to specify the DNS server addresses that clients should use for name resolution, allowing devices to convert domain names to IP addresses."
+            },
+            // Additional DHCP Questions
+            {
+                number: 17,
+                text: "What is the default port number used by DHCP servers?",
+                options: [
+                    "A) Port 53",
+                    "B) Port 67",
+                    "C) Port 80",
+                    "D) Port 443"
+                ],
+                correctAnswer: "B",
+                explanation: "DHCP servers use port 67 for receiving client requests, while DHCP clients use port 68 for sending requests. This is a standard defined in the DHCP protocol specification."
+            },
+            {
+                number: 18,
+                text: "What happens when a DHCP lease expires?",
+                options: [
+                    "A) The device immediately loses its IP address",
+                    "B) The device attempts to renew its lease",
+                    "C) The device automatically gets a new IP address",
+                    "D) The device can no longer connect to the network"
+                ],
+                correctAnswer: "B",
+                explanation: "When a DHCP lease expires, the device first attempts to renew its existing lease. If that fails, it will go through the full DHCP process to obtain a new IP address."
+            },
+            {
+                number: 19,
+                text: "What is the purpose of DHCP option 3?",
+                options: [
+                    "A) To specify the DNS server",
+                    "B) To set the default gateway",
+                    "C) To configure the subnet mask",
+                    "D) To set the domain name"
+                ],
+                correctAnswer: "B",
+                explanation: "DHCP option 3 is used to specify the default gateway (router) address that clients should use to reach other networks."
+            },
+            {
+                number: 20,
+                text: "What is a DHCP reservation?",
+                options: [
+                    "A) A temporary IP address assignment",
+                    "B) A permanent IP address assignment for a specific device",
+                    "C) A backup DHCP server",
+                    "D) A security feature to block unauthorized devices"
+                ],
+                correctAnswer: "B",
+                explanation: "A DHCP reservation is a permanent IP address assignment for a specific device, identified by its MAC address. This ensures the device always gets the same IP address."
+            },
+            // Additional DNS Questions
+            {
+                number: 21,
+                text: "What is the purpose of a DNS CNAME record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To create domain aliases",
+                    "C) To specify mail servers",
+                    "D) To store security certificates"
+                ],
+                correctAnswer: "B",
+                explanation: "A CNAME (Canonical Name) record creates an alias for a domain name, allowing multiple domain names to point to the same IP address."
+            },
+            {
+                number: 22,
+                text: "What is DNSSEC?",
+                options: [
+                    "A) A faster DNS resolution system",
+                    "B) A security extension for DNS",
+                    "C) A new type of DNS record",
+                    "D) A backup DNS server system"
+                ],
+                correctAnswer: "B",
+                explanation: "DNSSEC (DNS Security Extensions) adds security to the DNS protocol by providing authentication and data integrity, helping prevent DNS spoofing and cache poisoning attacks."
+            },
+            {
+                number: 23,
+                text: "What is the purpose of a DNS PTR record?",
+                options: [
+                    "A) To map domain names to IP addresses",
+                    "B) To specify mail servers",
+                    "C) To perform reverse DNS lookups",
+                    "D) To create domain aliases"
+                ],
+                correctAnswer: "C",
+                explanation: "A PTR (Pointer) record is used for reverse DNS lookups, allowing you to find a domain name from an IP address, which is the opposite of an A record."
+            },
+            {
+                number: 24,
+                text: "What is the purpose of a DNS MX record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify mail servers",
+                    "C) To create domain aliases",
+                    "D) To store security certificates"
+                ],
+                correctAnswer: "B",
+                explanation: "An MX (Mail Exchange) record specifies the mail servers responsible for receiving email for a domain, ensuring emails are delivered to the correct server."
+            },
+            {
+                number: 25,
+                text: "What is the purpose of a DNS AAAA record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To store IPv6 addresses",
+                    "C) To create domain aliases",
+                    "D) To specify mail servers"
+                ],
+                correctAnswer: "B",
+                explanation: "An AAAA record maps a domain name to an IPv6 address, similar to how an A record maps to an IPv4 address, but for the newer IPv6 protocol."
+            },
+            {
+                number: 26,
+                text: "What is the purpose of a DNS NS record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify name servers",
+                    "C) To create domain aliases",
+                    "D) To store security certificates"
+                ],
+                correctAnswer: "B",
+                explanation: "An NS (Name Server) record specifies the authoritative name servers for a domain, indicating which servers are responsible for the domain's DNS records."
+            },
+            {
+                number: 27,
+                text: "What is the purpose of a DNS TXT record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify name servers",
+                    "C) To store arbitrary text information",
+                    "D) To create domain aliases"
+                ],
+                correctAnswer: "C",
+                explanation: "A TXT record allows domain owners to add arbitrary text information to their DNS records, commonly used for verification, SPF records, and other purposes."
+            },
+            {
+                number: 28,
+                text: "What is the purpose of a DNS SOA record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify the start of authority for a zone",
+                    "C) To create domain aliases",
+                    "D) To store security certificates"
+                ],
+                correctAnswer: "B",
+                explanation: "A SOA (Start of Authority) record contains important information about a DNS zone, including the primary name server, administrator email, and zone parameters."
+            },
+            {
+                number: 29,
+                text: "What is the purpose of a DNS SRV record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify name servers",
+                    "C) To specify service locations",
+                    "D) To create domain aliases"
+                ],
+                correctAnswer: "C",
+                explanation: "An SRV (Service) record specifies the location of servers for specific services, allowing clients to find the appropriate server for a particular service."
+            },
+            {
+                number: 30,
+                text: "What is the purpose of a DNS CAA record?",
+                options: [
+                    "A) To store IPv4 addresses",
+                    "B) To specify name servers",
+                    "C) To create domain aliases",
+                    "D) To specify certificate authorities"
+                ],
+                correctAnswer: "D",
+                explanation: "A CAA (Certificate Authority Authorization) record specifies which certificate authorities are allowed to issue certificates for a domain, enhancing security by controlling who can issue certificates."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let currentStreak = 0;
+
+        function updateQuestion() {
+            const question = questions[currentQuestionIndex];
+            document.querySelector('.question-number').textContent = `Question ${question.number}`;
+            document.querySelector('.question-text').textContent = question.text;
+            
+            const optionsList = document.querySelector('.options');
+            optionsList.innerHTML = '';
+            question.options.forEach(option => {
+                const li = document.createElement('li');
+                li.className = 'option';
+                li.textContent = option;
+                li.dataset.option = option.charAt(0);
+                li.onclick = () => checkAnswer(option.charAt(0));
+                optionsList.appendChild(li);
+            });
+
+            const feedbackDiv = document.querySelector('.feedback');
+            feedbackDiv.className = 'feedback';
+            feedbackDiv.style.display = 'none';
+            feedbackDiv.innerHTML = `
+                <div class="feedback-text"></div>
+                <div class="explanation"></div>
+            `;
+
+            document.getElementById('current-question').textContent = question.number;
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        // Celebration System
+        const titles = [
+            "Firewall Whisperer",
+            "Patch Master",
+            "Digital Ninja",
+            "The Exploit Exorcist",
+            "Byte Guardian",
+            "Root Access Royalty",
+            "Crypto Commander",
+            "Phish Slayer",
+            "Zero-Day Hero",
+            "The Encryptor",
+            "Net Sentinel",
+            "Red Team Rockstar",
+            "The Bug Hunter",
+            "Token Titan",
+            "Cyber Sage",
+            "Packet Paladin",
+            "Malware Mercenary",
+            "The Boolean Boss",
+            "Code Shield",
+            "The Kernel Keeper"
+        ];
+
+        function createFirework(x, y, color) {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = x + 'px';
+            firework.style.top = y + 'px';
+            firework.style.backgroundColor = color;
+            document.getElementById('celebrationContainer').appendChild(firework);
+
+            setTimeout(() => {
+                firework.remove();
+            }, 1000);
+        }
+
+        function createFireworks() {
+            const container = document.getElementById('celebrationContainer');
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            
+            for (let i = 0; i < 30; i++) {
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                createFirework(x, y, color);
+            }
+        }
+
+        function celebrateStreak() {
+            const container = document.getElementById('celebrationContainer');
+            const message = document.getElementById('celebrationMessage');
+            const streakText = document.getElementById('streakText');
+            const titleText = document.getElementById('titleText');
+
+            // Clear previous fireworks
+            container.innerHTML = '';
+            container.appendChild(message);
+
+            // Set streak message
+            streakText.textContent = `Streak ${currentStreak}!`;
+            
+            // Set random title
+            const randomTitle = titles[Math.floor(Math.random() * titles.length)];
+            titleText.textContent = randomTitle;
+
+            // Show celebration
+            container.style.display = 'block';
+            createFireworks();
+
+            // Hide celebration after 4 seconds
+            setTimeout(() => {
+                container.style.display = 'none';
+            }, 4000);
+        }
+
+        function checkAnswer(selectedOption) {
+            const question = questions[currentQuestionIndex];
+            const options = document.querySelectorAll('.option');
+            const feedbackDiv = document.querySelector('.feedback');
+            const feedbackText = feedbackDiv.querySelector('.feedback-text');
+            const explanationDiv = feedbackDiv.querySelector('.explanation');
+            const streakContainer = document.getElementById('streakContainer');
+            const streakNumber = document.getElementById('streakNumber');
+
+            // Disable all options
+            options.forEach(option => {
+                option.classList.add('disabled');
+            });
+
+            // Mark the selected option
+            const selectedElement = document.querySelector(`[data-option="${selectedOption}"]`);
+            const correctElement = document.querySelector(`[data-option="${question.correctAnswer}"]`);
+
+            if (selectedOption === question.correctAnswer) {
+                selectedElement.classList.add('correct');
+                feedbackDiv.classList.add('correct');
+                feedbackText.textContent = 'Correct!';
+                explanationDiv.textContent = question.explanation;
+                
+                // Update streak
+                currentStreak++;
+                streakContainer.style.display = 'block';
+                streakNumber.textContent = currentStreak;
+                
+                // Check for celebration
+                if (currentStreak % 5 === 0) {
+                    celebrateStreak();
+                }
+            } else {
+                selectedElement.classList.add('incorrect');
+                correctElement.classList.add('correct');
+                feedbackDiv.classList.add('incorrect');
+                feedbackText.textContent = 'Incorrect!';
+                explanationDiv.textContent = question.explanation;
+                
+                // Reset streak
+                currentStreak = 0;
+                streakContainer.style.display = 'none';
+            }
+
+            feedbackDiv.style.display = 'block';
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                updateQuestion();
+            } else {
+                document.querySelector('.question-container').innerHTML = `
+                    <div class="question-text" style="text-align: center;">
+                        Congratulations! You've completed the quiz! 🎉
+                    </div>
+                `;
+                document.querySelector('.nav-buttons').style.display = 'none';
+            }
+        }
+
+        // Initialize the first question
+        updateQuestion();
+    </script>
+</body>
+</html> 

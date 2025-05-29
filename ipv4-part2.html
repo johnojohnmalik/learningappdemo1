@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPv4 Part 2: DHCP & DNS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #000;
+            font-family: 'Rajdhani', sans-serif;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            margin: 30px 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+        }
+
+        h2 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        h3 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin: 20px 0 15px;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        p {
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            color: #fff;
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .step-list {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        .step-list li {
+            margin-bottom: 10px;
+            position: relative;
+            color: #fff;
+        }
+
+        .step-list li:before {
+            content: "→";
+            position: absolute;
+            left: -20px;
+            color: #00ffff;
+        }
+
+        .module-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .module-btn {
+            background: rgba(0, 255, 255, 0.1);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .module-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Quiz Question Styles */
+        .quiz-question {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+        }
+
+        .quiz-question h4 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .quiz-options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .quiz-option {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: rgba(0, 255, 0, 0.2);
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(255, 0, 0, 0.2);
+            border-color: #ff0000;
+            color: #ff0000;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            color: #00ff00;
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff0000;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 IPv4 Part 2: DHCP & DNS</h1>
+        
+        <div class="content-section">
+            <div class="section">
+                <h2>🌟 Part 1: How Devices Get Their Identity – BOOTP & DHCP</h2>
+                <p>🚪 Imagine this: You're moving into a big apartment building. You walk into the lobby and ask, "Can someone give me a room and show me around?" That's exactly what happens when a device connects to a network — it needs a room number (IP address) and some basic instructions.</p>
+                <p>That's where BOOTP and later DHCP come in.</p>
+
+                <h3>🧓 BOOTP – The Original Network Concierge</h3>
+                <p>BOOTP (Bootstrap Protocol) was invented in the early days of networking. Back then, setting up every computer manually was a real pain. BOOTP allowed computers to automatically receive:</p>
+                <ul>
+                    <li>An IP address (so they could be recognized on the network)</li>
+                    <li>The location of a "boot server" (if needed)</li>
+                    <li>Some basic network info</li>
+                </ul>
+
+                <h3>🚀 DHCP – The Modern, Smart Way to Join a Network</h3>
+                <p>Dynamic Host Configuration Protocol (DHCP) is like BOOTP's cool, upgraded grandchild. It does everything BOOTP did — and more — and it's what we use today.</p>
+                <p>When you connect your device to Wi-Fi, DHCP gives it an IP address automatically from a pool of available addresses. It's like handing out numbered tickets at a deli — each device gets a unique number for a certain time (called a lease).</p>
+                <p>DHCP also gives out other useful info, like:</p>
+                <ul>
+                    <li>Where the internet "exit door" is (default gateway)</li>
+                    <li>Where to ask about website names (DNS server)</li>
+                    <li>The time server, domain suffix, and more</li>
+                </ul>
+
+                <h3>🔄 How the IP Address Dance Works: The 4-Step Process</h3>
+                <ol class="step-list">
+                    <li>DHCP Discover: Your device shouts, "Hey! Anyone out there who can give me an IP address?"</li>
+                    <li>DHCP Offer: A DHCP server replies, "Sure, I've got one! You can have 192.168.1.24."</li>
+                    <li>DHCP Request: Your device says, "Great! I'd like to use that one, please."</li>
+                    <li>DHCP Acknowledge (ACK): The server confirms, "It's all yours!"</li>
+                </ol>
+
+                <!-- DHCP Quiz Question -->
+                <div class="quiz-question" id="dhcp-quiz">
+                    <h4>Quick Check: DHCP Process</h4>
+                    <p>What happens during the DHCP Discover step?</p>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" onclick="checkAnswer('dhcp-quiz', 'A')">A) The server confirms the IP address assignment</li>
+                        <li class="quiz-option" onclick="checkAnswer('dhcp-quiz', 'B')">B) The client broadcasts a message to find DHCP servers</li>
+                        <li class="quiz-option" onclick="checkAnswer('dhcp-quiz', 'C')">C) The server proposes an available IP address</li>
+                        <li class="quiz-option" onclick="checkAnswer('dhcp-quiz', 'D')">D) The client rejects the offered IP address</li>
+                    </ul>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                        <div class="explanation"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>🗃️ Part 2: Who Translates Website Names to Numbers? – DNS</h2>
+                <p>🧭 Remembering Numbers is Hard... Imagine trying to call your friends if all you had were their phone numbers, no names. That's what the internet would be like without DNS (Domain Name System).</p>
+
+                <h3>🏠 From Flat Names to Hierarchies</h3>
+                <p>Early networks used a single shared file — like a notebook of all known names and addresses. This was called HOSTS.TXT, and every new computer required manual updates.</p>
+                <p>That worked when there were 10 computers. It crashed and burned when there were 10 million.</p>
+
+                <h3>🌳 DNS Hierarchy – Explained Simply</h3>
+                <ul>
+                    <li>Root Servers – The top of the tree (like the "Mayor's office" of the internet). There are 13 main ones in the world.</li>
+                    <li>TLD Servers – Handle domains like .com, .org, .edu, or country-specific like .uk, .il, .jp.</li>
+                    <li>Authoritative Servers – Know the final answer: "Where exactly is surfclub.com?"</li>
+                </ul>
+
+                <h3>🔍 What Happens When You Type a Website?</h3>
+                <p>Let's say you go to www.surfclub.com. Here's the hidden magic:</p>
+                <ol class="step-list">
+                    <li>Your computer checks if it already knows the answer (cache).</li>
+                    <li>If not, it asks its DNS server: "Where's this website?"</li>
+                    <li>The DNS server either knows the answer — or goes on a journey to find it.</li>
+                    <li>Finally, it gets the IP and gives it back to your computer</li>
+                </ol>
+
+                <h3>📘 DNS Records – What's in the Phonebook?</h3>
+                <ul>
+                    <li>A Record: Standard – maps name to IPv4 address</li>
+                    <li>AAAA Record: For newer IPv6 addresses</li>
+                    <li>MX Record: Mail server addresses</li>
+                    <li>CNAME: Nicknames/aliases</li>
+                    <li>NS: Who's in charge of the domain</li>
+                    <li>PTR: Reverse lookup (IP → name)</li>
+                    <li>TXT, SPF, and more for security and special services</li>
+                </ul>
+
+                <!-- DNS Quiz Question -->
+                <div class="quiz-question" id="dns-quiz">
+                    <h4>Quick Check: DNS Records</h4>
+                    <p>What is the purpose of a DNS A Record?</p>
+                    <ul class="quiz-options">
+                        <li class="quiz-option" onclick="checkAnswer('dns-quiz', 'A')">A) To store email server information</li>
+                        <li class="quiz-option" onclick="checkAnswer('dns-quiz', 'B')">B) To map a domain name to an IPv4 address</li>
+                        <li class="quiz-option" onclick="checkAnswer('dns-quiz', 'C')">C) To create domain aliases</li>
+                        <li class="quiz-option" onclick="checkAnswer('dns-quiz', 'D')">D) To store security certificates</li>
+                    </ul>
+                    <div class="quiz-feedback">
+                        <div class="feedback-text"></div>
+                        <div class="explanation"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="module-buttons">
+            <button class="module-btn" onclick="window.location.href='ipv4-part2-quiz.html'">Practice</button>
+        </div>
+    </div>
+
+    <script>
+        const quizAnswers = {
+            'dhcp-quiz': {
+                correct: 'B',
+                explanation: 'During the DHCP Discover step, the client broadcasts a message to find available DHCP servers on the network, as it doesn\'t know which server to contact.'
+            },
+            'dns-quiz': {
+                correct: 'B',
+                explanation: 'An A Record is the most basic type of DNS record that maps a domain name to its corresponding IPv4 address, allowing computers to find websites using human-readable names.'
+            }
+        };
+
+        function checkAnswer(quizId, selectedOption) {
+            const quiz = document.getElementById(quizId);
+            const options = quiz.querySelectorAll('.quiz-option');
+            const feedback = quiz.querySelector('.quiz-feedback');
+            const feedbackText = feedback.querySelector('.feedback-text');
+            const explanation = feedback.querySelector('.explanation');
+            const answer = quizAnswers[quizId];
+
+            // Disable all options
+            options.forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            // Mark the selected option
+            const selectedElement = quiz.querySelector(`[onclick="checkAnswer('${quizId}', '${selectedOption}')"]`);
+            const correctElement = quiz.querySelector(`[onclick="checkAnswer('${quizId}', '${answer.correct}')"]`);
+
+            if (selectedOption === answer.correct) {
+                selectedElement.classList.add('correct');
+                feedback.classList.add('correct');
+                feedbackText.textContent = 'Correct!';
+            } else {
+                selectedElement.classList.add('incorrect');
+                correctElement.classList.add('correct');
+                feedback.classList.add('incorrect');
+                feedbackText.textContent = 'Incorrect!';
+            }
+
+            explanation.textContent = answer.explanation;
+            feedback.style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

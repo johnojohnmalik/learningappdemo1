@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Basic Terms</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="progress-bar.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .table-of-contents {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #00ffff;
+        }
+
+        .table-of-contents h2 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .table-of-contents ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .table-of-contents li {
+            margin: 10px 0;
+        }
+
+        .table-of-contents a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .table-of-contents a:hover {
+            color: #00ffff;
+            transform: translateX(10px);
+        }
+
+        .topology-intro {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #00ffff;
+        }
+
+        .topology-intro h2 {
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .topology-intro p {
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .section {
+            scroll-margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📡 Network Basic Terms</h1>
+
+        <div class="table-of-contents">
+            <h2>📚 Table of Contents</h2>
+            <ul>
+                <li><a href="#topologies">Topologies</a></li>
+                <li><a href="#network-types">Types of Networks</a></li>
+                <li><a href="#network-equipment">Network Equipment and Devices</a></li>
+            </ul>
+        </div>
+
+        <div id="topologies" class="topology-section">
+            <h2>🌐 Topologies</h2>
+            <p>The layout or structure of how computers and network devices are connected and communicate. Each type of topology has advantages and disadvantages depending on the situation.</p>
+        </div>
+
+        <div class="topology-section">
+            <h2>Point-to-Point Topology</h2>
+            <h3>What it is:</h3>
+            <p>A direct connection between two devices. Only those two devices are involved, and the communication is private.</p>
+
+            <div class="analogy">
+                <h4>Analogy:</h4>
+                <p>Like a private phone call between two people — no one else can hear the conversation.</p>
+            </div>
+
+            <h3>When it's used:</h3>
+            <p>Often used in smaller or temporary networks, such as direct PC-to-PC file transfers or in some WAN connections (e.g., leased lines between buildings).</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Simple and fast</li>
+                        <li>Very secure (only two devices involved)</li>
+                        <li>Easy to set up</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Cons:</h4>
+                    <ul>
+                        <li>Not scalable — only connects two devices</li>
+                        <li>If the connection fails, communication stops entirely</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="star" class="topology-section section">
+            <h2>Star Topology</h2>
+            <h3>What it is:</h3>
+            <p>All devices are connected to a single central device (like a switch or hub). All communication passes through this central point.</p>
+
+            <div class="analogy">
+                <h4>Analogy:</h4>
+                <p>Like a classroom where the teacher (in the center) communicates individually with each student.</p>
+            </div>
+
+            <h3>When it's used:</h3>
+            <p>Very common in home and office networks using switches or wireless routers.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Easy to add or remove devices</li>
+                        <li>If one device fails, others keep working</li>
+                        <li>Centralized management is easy</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Cons:</h4>
+                    <ul>
+                        <li>If the central device fails, the whole network goes down</li>
+                        <li>Requires more cable than some other topologies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="bus" class="topology-section section">
+            <h2>Bus Topology <span class="status outdated">Not common today</span></h2>
+            <h3>What it is:</h3>
+            <p>All devices share a single central cable (called a backbone) for communication. Messages are broadcast to all devices.</p>
+
+            <div class="analogy">
+                <h4>Analogy:</h4>
+                <p>Like everyone talking on the same walkie-talkie channel — everyone hears everything, even if it's not meant for them.</p>
+            </div>
+
+            <h3>When it was used:</h3>
+            <p>Older Ethernet networks (using coaxial cable) in small offices or homes.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Simple and cheap to set up</li>
+                        <li>Uses less cable than star or mesh</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Cons:</h4>
+                    <ul>
+                        <li>A break in the main cable can bring down the entire network</li>
+                        <li>Performance drops as more devices are added</li>
+                        <li>Hard to troubleshoot</li>
+                        <li>Security is poor (data sent to all)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="ring" class="topology-section section">
+            <h2>Ring Topology <span class="status outdated">Rarely used today</span></h2>
+            <h3>What it is:</h3>
+            <p>Devices are connected in a closed loop. Data travels in one direction, from one device to the next, until it reaches its destination.</p>
+
+            <div class="analogy">
+                <h4>Analogy:</h4>
+                <p>Like passing a note around in a circle — each person reads and passes it on.</p>
+            </div>
+
+            <h3>When it was used:</h3>
+            <p>In some older networks like Token Ring (IBM). Sometimes still found in industrial systems.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Can handle high-volume traffic better than a bus topology</li>
+                        <li>Every device gets a turn to communicate (no collisions)</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Cons:</h4>
+                    <ul>
+                        <li>One device or connection failing can bring down the whole network</li>
+                        <li>Adding/removing devices is difficult</li>
+                        <li>Slower than modern alternatives</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="mesh" class="topology-section section">
+            <h2>Mesh Topology <span class="status current">Used in critical systems or smart homes</span></h2>
+            <h3>What it is:</h3>
+            <p>Every device is connected to every other device. In a full mesh, all devices are directly connected. In a partial mesh, only some are.</p>
+
+            <div class="analogy">
+                <h4>Analogy:</h4>
+                <p>Like a tight group of friends — everyone can talk directly to everyone else, without needing a middleman.</p>
+            </div>
+
+            <h3>When it's used:</h3>
+            <p>In networks that require high reliability, like military systems, smart homes, or data centers. Also used in wireless mesh networks.</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Very reliable (no single point of failure)</li>
+                        <li>Data can take many paths — fast and efficient</li>
+                        <li>Great for mission-critical systems</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Cons:</h4>
+                    <ul>
+                        <li>Expensive and complex to install</li>
+                        <li>Requires a lot of cabling (in wired versions)</li>
+                        <li>Hard to manage as it grows</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="hybrid" class="topology-section section">
+            <h2>Hybrid Topology <span class="status current">Common today</span></h2>
+            <h3>What it is:</h3>
+            <p>A combination of two or more different topologies. For example, a large network might use star topology in each room and connect those rooms using a ring or bus.</p>
+
+            <div class="analogy">
+                <h4>Analogy:</h4>
+                <p>Like a school building where each classroom has desks arranged in a star, and the classrooms are connected by hallways (bus or ring).</p>
+            </div>
+
+            <h3>When it's used:</h3>
+            <p>In real-world networks where different parts of the system need different structures (e.g., a campus, office building, or factory).</p>
+
+            <div class="pros-cons">
+                <div class="pros">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Flexible — can be designed to meet specific needs</li>
+                        <li>Scalable</li>
+                        <li>Can isolate failures to specific areas</li>
+                    </ul>
+                </div>
+                <div class="cons">
+                    <h4>Cons:</h4>
+                    <ul>
+                        <li>More complex to design and manage</li>
+                        <li>Can be costly if not planned well</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="network-types" class="network-types-section section">
+            <h2>🌐 Types of Networks — Expanded & Explained</h2>
+            
+            <div class="network-type">
+                <h3>🧍‍♂️ PAN (Personal Area Network)</h3>
+                <p>Your personal digital bubble. A PAN connects your personal devices — like your smartphone, smartwatch, earbuds, and fitness tracker — usually within a 10-meter radius.</p>
+                <ul>
+                    <li>🔗 It's like your tech family staying in touch all day.</li>
+                    <li>💡 Bluetooth and USB connections are the usual players here.</li>
+                    <li>📱 Example: When your phone syncs with your wireless earbuds or smartwatch.</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>🏡 LAN (Local Area Network)</h3>
+                <p>A LAN connects multiple devices in a limited space — like your home, a small business, or a school lab.</p>
+                <ul>
+                    <li>🧑‍💻 Everyone shares resources like internet access, printers, or files.</li>
+                    <li>💡 Usually set up using Ethernet cables or Wi-Fi with a switch or router.</li>
+                    <li>🛠️ Managed by: You or your office IT team — no need for outside providers.</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>📶 WLAN (Wireless Local Area Network)</h3>
+                <p>This is basically a LAN — but with no cables. Devices connect through Wi-Fi.</p>
+                <ul>
+                    <li>💨 Freedom to move around without losing connection!</li>
+                    <li>💡 Common in homes, airports, cafés, and schools.</li>
+                    <li>🌐 Often secured with passwords and encryption (like WPA2) to keep your data safe.</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>🌍 WAN (Wide Area Network)</h3>
+                <p>WANs connect devices across huge distances — cities, countries, even continents.</p>
+                <ul>
+                    <li>🧳 Think of it like a massive road network linking different towns (LANs).</li>
+                    <li>📡 The internet is the world's largest WAN.</li>
+                    <li>🧠 Powered by: Internet Service Providers (ISPs) — companies like AT&T, Vodafone, or Claro maintain the infrastructure (fiber optics, satellites, undersea cables) and connect your home to the world.</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>🤝 P2P (Peer-to-Peer Network)</h3>
+                <p>All devices (peers) are equal and can share resources without a central server.</p>
+                <ul>
+                    <li>🎮 Used in things like torrent sharing, local file swaps, or multiplayer games.</li>
+                    <li>💡 No boss — just mutual cooperation.</li>
+                    <li>⚠️ Can be less secure if not configured properly — no central authority means more responsibility on each peer.</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>🖥️🍽 Client-Server Network</h3>
+                <p>This setup has a clear structure: clients make requests, servers deliver the goods.</p>
+                <ul>
+                    <li>📚 Used in businesses, apps, and websites — like when you log into your email or stream Netflix.</li>
+                    <li>💡 The server stores, processes, and manages data, while clients (your devices) ask for it.</li>
+                    <li>🧑‍💼 Managed by: IT departments, hosting companies, cloud providers (like AWS or Google Cloud).</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>🌐 Internet</h3>
+                <p>The network of all networks. Connects billions of devices across the globe.</p>
+                <ul>
+                    <li>🧭 You use it to browse, stream, chat, work, shop, and learn.</li>
+                    <li>🧠 Powered by: Multiple layers of infrastructure, run by governments, ISPs, data centers, submarine cable companies, and more.</li>
+                    <li>⚙️ Uses protocols like TCP/IP to keep everything running smoothly.</li>
+                </ul>
+            </div>
+
+            <div class="network-type">
+                <h3>🏢 Intranet</h3>
+                <p>A mini-internet for internal use in an organization. Think private company portals.</p>
+                <ul>
+                    <li>🔒 Only employees or members can access it — secure and isolated.</li>
+                    <li>📁 Used to share internal documents, HR forms, announcements, etc.</li>
+                    <li>🧠 Managed by: The organization's internal IT team.</li>
+                    <li>💡 Often runs on the same technology as the internet but with tighter security and limited access.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="network-equipment" class="equipment-section section">
+            <h2>🖥️ Network Equipment and End Devices — Expanded</h2>
+            <p>These are the behind-the-scenes heroes that help your messages travel from one device to another — fast, clear, and to the right place!</p>
+
+            <div class="device-type">
+                <h3>🔁 Repeater</h3>
+                <div class="device-content">
+                    <h4>What it does:</h4>
+                    <p>A repeater takes a weak or fading signal and boosts it so it can keep traveling farther.</p>
+
+                    <div class="analogy">
+                        <h4>Think of it like this:</h4>
+                        <p>You're yelling across a canyon. Your voice starts to fade, but someone in the middle repeats it loudly, helping your message reach the other side.</p>
+                    </div>
+
+                    <h4>Where it's used:</h4>
+                    <p>Used to extend network range, especially in long-distance wired or wireless connections — like in large buildings or across campuses.</p>
+
+                    <div class="status current">✅ Still useful in certain network setups and long-range communication. But their role is more limited compared to the past.</div>
+                </div>
+            </div>
+
+            <div class="device-type">
+                <h3>📢 Hub</h3>
+                <div class="device-content">
+                    <h4>What it does:</h4>
+                    <p>A hub connects several devices and sends the same message to all of them — whether they need it or not.</p>
+
+                    <div class="analogy">
+                        <h4>Think of it like this:</h4>
+                        <p>It's like shouting an announcement in a crowded room — everyone hears it, even if it's not meant for them.</p>
+                    </div>
+
+                    <h4>Why it's outdated:</h4>
+                    <p>Hubs are simple and cheap, but not smart. They create lots of "noise" and slow things down.</p>
+
+                    <div class="status outdated">❌ Rarely used today — replaced by smarter devices like switches.</div>
+                </div>
+            </div>
+
+            <div class="device-type">
+                <h3>🌉 Bridge</h3>
+                <div class="device-content">
+                    <h4>What it does:</h4>
+                    <p>A bridge connects two similar networks and manages traffic between them. It helps reduce congestion and organizes data flow.</p>
+
+                    <div class="analogy">
+                        <h4>Think of it like this:</h4>
+                        <p>Two neighborhoods want to visit each other, but there's a river in between. A bridge lets them cross easily without getting lost.</p>
+                    </div>
+
+                    <h4>When it's used:</h4>
+                    <p>Still relevant in some cases, especially in older or segmented networks.</p>
+
+                    <div class="status current">✅ Useful when combining or isolating parts of a LAN.</div>
+                </div>
+            </div>
+
+            <div class="device-type">
+                <h3>🔀 Switch</h3>
+                <div class="device-content">
+                    <h4>What it does:</h4>
+                    <p>A switch connects devices like computers and printers, but unlike a hub, it sends data only to the intended device.</p>
+
+                    <div class="analogy">
+                        <h4>Think of it like this:</h4>
+                        <p>Imagine a mail carrier delivering letters only to the right address — not dumping everyone's mail in the same box.</p>
+                    </div>
+
+                    <h4>Why it's awesome:</h4>
+                    <p>Fast, secure, and efficient. Switches are the backbone of modern LANs.</p>
+
+                    <div class="status current">✅ Very common — used everywhere, from homes to large offices.</div>
+                </div>
+            </div>
+
+            <div class="device-type">
+                <h3>🚦 Router</h3>
+                <div class="device-content">
+                    <h4>What it does:</h4>
+                    <p>A router connects different networks — like your home network to the internet. It figures out the best path for your data to travel.</p>
+
+                    <div class="analogy">
+                        <h4>Think of it like this:</h4>
+                        <p>A router is a traffic cop at a busy intersection, directing each car (or data packet) where it needs to go based on its destination.</p>
+                    </div>
+
+                    <h4>Bonus:</h4>
+                    <p>Most home routers are all-in-one devices that also include a switch, wireless access point, and sometimes even a firewall.</p>
+
+                    <div class="status current">✅ Essential for both home and business networks.</div>
+                </div>
+            </div>
+
+            <div class="device-type">
+                <h3>📡 Wireless Access Point (WAP)</h3>
+                <div class="device-content">
+                    <h4>What it does:</h4>
+                    <p>A WAP lets wireless devices connect to a wired network using Wi-Fi. It broadcasts a signal that your laptop, phone, or tablet can connect to.</p>
+
+                    <div class="analogy">
+                        <h4>Think of it like this:</h4>
+                        <p>It's like a mini radio tower in your home or office that shouts out: "Hey! Connect to me for internet!"</p>
+                    </div>
+
+                    <h4>Why it's important:</h4>
+                    <p>Crucial in buildings where users move around or need Wi-Fi in multiple rooms.</p>
+
+                    <div class="status current">✅ Common in homes, cafes, airports, schools — basically everywhere you need Wi-Fi.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-section">
+            <h2>✅ Network Devices Quiz: Test Your Tech Smarts!</h2>
+            <p>Choose the best answer for each question (1-6).</p>
+
+            <div class="quiz-question">
+                <p>1. What does a switch do that makes it better than a hub?</p>
+                <div class="quiz-options">
+                    <label class="option">
+                        <input type="radio" name="devices_q1" value="A" onchange="checkDeviceAnswer('devices_q1', 'A')"> A. It connects to the internet directly
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q1" value="B" onchange="checkDeviceAnswer('devices_q1', 'B')"> B. It sends data to all devices
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q1" value="C" onchange="checkDeviceAnswer('devices_q1', 'C')"> C. It sends data only to the correct destination
+                    </label>
+                </div>
+                <div class="feedback" id="devices_feedback1"></div>
+            </div>
+
+            <div class="quiz-question">
+                <p>2. What's the role of a router in a network?</p>
+                <div class="quiz-options">
+                    <label class="option">
+                        <input type="radio" name="devices_q2" value="A" onchange="checkDeviceAnswer('devices_q2', 'A')"> A. It stores files and apps
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q2" value="B" onchange="checkDeviceAnswer('devices_q2', 'B')"> B. It connects networks and directs data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q2" value="C" onchange="checkDeviceAnswer('devices_q2', 'C')"> C. It plays music over Wi-Fi
+                    </label>
+                </div>
+                <div class="feedback" id="devices_feedback2"></div>
+            </div>
+
+            <div class="quiz-question">
+                <p>3. Why is a hub rarely used in modern networks?</p>
+                <div class="quiz-options">
+                    <label class="option">
+                        <input type="radio" name="devices_q3" value="A" onchange="checkDeviceAnswer('devices_q3', 'A')"> A. It's too expensive
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q3" value="B" onchange="checkDeviceAnswer('devices_q3', 'B')"> B. It slows down the network by sending data to everyone
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q3" value="C" onchange="checkDeviceAnswer('devices_q3', 'C')"> C. It only works with wireless devices
+                    </label>
+                </div>
+                <div class="feedback" id="devices_feedback3"></div>
+            </div>
+
+            <div class="quiz-question">
+                <p>4. What is the main purpose of a repeater?</p>
+                <div class="quiz-options">
+                    <label class="option">
+                        <input type="radio" name="devices_q4" value="A" onchange="checkDeviceAnswer('devices_q4', 'A')"> A. It translates Wi-Fi signals into internet
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q4" value="B" onchange="checkDeviceAnswer('devices_q4', 'B')"> B. It boosts a weak signal to extend network range
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q4" value="C" onchange="checkDeviceAnswer('devices_q4', 'C')"> C. It connects printers to networks
+                    </label>
+                </div>
+                <div class="feedback" id="devices_feedback4"></div>
+            </div>
+
+            <div class="quiz-question">
+                <p>5. What does a Wireless Access Point (WAP) do?</p>
+                <div class="quiz-options">
+                    <label class="option">
+                        <input type="radio" name="devices_q5" value="A" onchange="checkDeviceAnswer('devices_q5', 'A')"> A. Connects Bluetooth devices to your phone
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q5" value="B" onchange="checkDeviceAnswer('devices_q5', 'B')"> B. Sends wireless signals so devices can access a network
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q5" value="C" onchange="checkDeviceAnswer('devices_q5', 'C')"> C. Helps charge your laptop wirelessly
+                    </label>
+                </div>
+                <div class="feedback" id="devices_feedback5"></div>
+            </div>
+
+            <div class="quiz-question">
+                <p>6. A bridge in networking is used to:</p>
+                <div class="quiz-options">
+                    <label class="option">
+                        <input type="radio" name="devices_q6" value="A" onchange="checkDeviceAnswer('devices_q6', 'A')"> A. Connect two different networks like LAN and WAN
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q6" value="B" onchange="checkDeviceAnswer('devices_q6', 'B')"> B. Store backup copies of data
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="devices_q6" value="C" onchange="checkDeviceAnswer('devices_q6', 'C')"> C. Connect two similar networks and manage traffic between them
+                    </label>
+                </div>
+                <div class="feedback" id="devices_feedback6"></div>
+            </div>
+
+            <div id="devices_final-score" class="celebration" style="display: none;"></div>
+        </div>
+
+        <script src="progress-bar.js"></script>
+        <script>
+            const correctAnswers = {
+                q1: 'B',
+                q2: 'A',
+                q3: 'B',
+                q4: 'B',
+                q5: 'C',
+                q6: 'B',
+                q7: 'B',
+                q8: 'B'
+            };
+
+            let answeredQuestions = new Set();
+
+            function checkAnswer(questionName, selectedValue) {
+                const feedback = document.getElementById(`feedback${questionName.slice(1)}`);
+                const selectedOption = document.querySelector(`input[name="${questionName}"][value="${selectedValue}"]`);
+                const allOptions = document.querySelectorAll(`input[name="${questionName}"]`);
+                
+                // Reset styles for all options in this question
+                allOptions.forEach(opt => {
+                    opt.parentElement.classList.remove('correct', 'incorrect');
+                });
+
+                if (selectedValue === correctAnswers[questionName]) {
+                    feedback.textContent = '✅ Correct!';
+                    feedback.className = 'feedback correct';
+                    selectedOption.parentElement.classList.add('correct');
+                } else {
+                    feedback.textContent = `❌ Incorrect. The correct answer is: ${correctAnswers[questionName]}`;
+                    feedback.className = 'feedback incorrect';
+                    selectedOption.parentElement.classList.add('incorrect');
+                }
+                feedback.style.display = 'block';
+
+                // Track answered questions
+                answeredQuestions.add(questionName);
+                
+                // Check if all questions are answered
+                if (answeredQuestions.size === 8) {
+                    showFinalScore();
+                }
+            }
+
+            function showFinalScore() {
+                let score = 0;
+                for (let i = 1; i <= 8; i++) {
+                    const questionName = `q${i}`;
+                    const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                    if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+                        score++;
+                    }
+                }
+
+                const finalScore = document.getElementById('final-score');
+                finalScore.innerHTML = `
+                    <h3>🎉 Quiz Complete!</h3>
+                    <p>You got ${score} out of 8 questions correct.</p>
+                    ${score === 8 ? '<p>Perfect score! Well done! 🌟</p>' : ''}
+                `;
+                finalScore.style.display = 'block';
+            }
+
+            // Network Devices Quiz
+            const deviceCorrectAnswers = {
+                devices_q1: 'C',
+                devices_q2: 'B',
+                devices_q3: 'B',
+                devices_q4: 'B',
+                devices_q5: 'B',
+                devices_q6: 'C'
+            };
+
+            let deviceAnsweredQuestions = new Set();
+
+            function checkDeviceAnswer(questionName, selectedValue) {
+                const questionNumber = questionName.slice(-1);
+                const feedback = document.getElementById(`devices_feedback${questionNumber}`);
+                const selectedOption = document.querySelector(`input[name="${questionName}"][value="${selectedValue}"]`);
+                const allOptions = document.querySelectorAll(`input[name="${questionName}"]`);
+                
+                // Reset styles for all options in this question
+                allOptions.forEach(opt => {
+                    opt.parentElement.classList.remove('correct', 'incorrect');
+                });
+
+                if (selectedValue === deviceCorrectAnswers[questionName]) {
+                    feedback.textContent = '✅ Correct!';
+                    feedback.className = 'feedback correct';
+                    selectedOption.parentElement.classList.add('correct');
+                } else {
+                    feedback.textContent = `❌ Incorrect. The correct answer is: ${deviceCorrectAnswers[questionName]}`;
+                    feedback.className = 'feedback incorrect';
+                    selectedOption.parentElement.classList.add('incorrect');
+                }
+                feedback.style.display = 'block';
+
+                // Track answered questions
+                deviceAnsweredQuestions.add(questionName);
+                
+                // Check if all questions are answered
+                if (deviceAnsweredQuestions.size === 6) {
+                    showDeviceFinalScore();
+                }
+            }
+
+            function showDeviceFinalScore() {
+                let score = 0;
+                for (let i = 1; i <= 6; i++) {
+                    const questionName = `devices_q${i}`;
+                    const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+                    if (selectedAnswer && selectedAnswer.value === deviceCorrectAnswers[questionName]) {
+                        score++;
+                    }
+                }
+
+                const finalScore = document.getElementById('devices_final-score');
+                finalScore.innerHTML = `
+                    <h3>🎉 Quiz Complete!</h3>
+                    <p>You got ${score} out of 6 questions correct.</p>
+                    ${score === 6 ? '<p>Perfect score! Well done! 🌟</p>' : ''}
+                `;
+                finalScore.style.display = 'block';
+            }
+        </script>
+    </div>
+</body>
+</html> 
